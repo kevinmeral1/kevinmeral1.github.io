@@ -1,0 +1,967 @@
+/* Body */
+
+body {
+    background-color: black;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Exo 2', sans-serif;
+    
+  }
+
+/* Containergröße */
+
+  .container {
+    width: 84.762%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }   
+   
+
+   
+  
+
+
+
+
+/* Navigationsleiste */
+
+  nav {
+
+    /* Farben */
+
+    background-color: black;
+    width: 100%;
+    position: sticky;
+    
+    
+
+    /* äußerer Abstand */ 
+
+    margin-top: 2.875em;
+    margin-left: 1.875em;
+    margin-right: 1.875em;
+
+    /* Innerer Abstand */
+
+    padding-top: 0.188em;
+    padding-bottom: 0.563em;
+    padding-left: 1.188em;
+
+    /* Kanten und Schatten */
+
+    border-radius: 4px;
+    box-shadow: 0 0 12px black;
+    overflow: hidden; /* Versteckt den Inhalt, der über die Höhe hinausgeht */
+    transition: max-height 0.5s ease;
+ }
+  
+
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav ul li:first-child {
+    margin-right: auto;
+  }
+  nav ul li:last-child {
+    margin-right: 20px; /* Passe den gewünschten Abstand an */
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-left: 10px;
+    margin-top: 5px; /* Passe den gewünschten Abstand an */
+    }
+ 
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    
+  }
+
+/* öffnende Navigationsleiste */
+
+nav ul.open {
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+nav ul li {
+  display: block;
+}
+.nav-list {
+  height: 0;
+  overflow: hidden;
+  transition: height 5.3s ease;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list.open {
+  height: auto;
+}
+
+.nav-list li {
+  font-size: 4em;
+  margin-bottom: 2em;
+}
+
+
+#loginField {
+  display: none; /* Initially hide the login field */
+  position: absolute;
+  top: 2em;
+  right: 10em; /* Adjust the position as per your requirements */
+  display: flex;
+  align-items: center;
+
+}
+.login-button {
+  width: 6em; /* Adjust the width as per your requirements */
+  height: 1.7em;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Header */
+  
+  header {
+    background-color: white;
+    color: white;
+    padding-bottom: 5em;
+    margin-top: -3em;
+    width:fit-content;
+    height: 100vh;
+    position: relative;
+
+    .header-content {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Fügt Zeilenumbruch hinzu */
+   
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main */
+  
+  main {
+    padding: 5rem;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer */
+  
+  footer {
+    background-color: #333;
+    width: 100%;
+    justify-content: space-between
+    }
+
+  .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .horizontal-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 500px; /* Passe die Breite an deine Bedürfnisse an */
+  }
+  
+  .icon {
+    margin-top: -16em;
+    width: 20px;
+    height: 40px;
+    background-size: cover;
+    background-position: center;
+    padding-right: 10em;
+    vertical-align: top; /* Icons vertikal zentrieren */
+  }
+  
+  .footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 6.25em;
+    font-size: 2em;
+    height: 350px;
+  }
+  
+  
+  .footer ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 1.125em;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    height: 40px;
+  }
+  
+
+
+  .footer li:first-child {
+    font-weight: bold;
+  }
+
+  .footer li a:last-child {
+    margin-right: 6.25em;
+  }
+ 
+ 
+  .impressum {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    
+  }
+
+.footer a:hover,
+
+.icon img:hover {
+  color: #ccc; /* Set the hover color to a darker shade */
+  cursor: pointer; /* Set the cursor style to pointer */
+  margin-top: 5px; /* Add a margin of 5 pixels at the top */
+  border-bottom: 2px solid #037CC2; /* Add a blue bottom border */
+}
+
+.footer .icon:hover {
+  background-color: #ccc; /* Set the background color of the icon to a darker shade */
+  cursor: pointer; /* Set the cursor style to pointer */
+  border-bottom: 2px solid #037CC2; /* Add a blue bottom border */
+  margin-top: 5px; /* Add a margin of 5 pixels at the top */
+  padding-bottom: 0; /* Remove any padding at the bottom */
+}
+
+.impressum p:hover {
+  color: #ccc;
+  cursor: pointer;
+  margin-top: 5px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+/* Font */
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
+
+
+
+
+/* Überschriften */
+h1 {
+  font-size: 5.5em;
+  color: black;
+  text-align: center; /* Text zentrieren */
+  margin: 0 auto; /* Automatischer äußerer Abstand (links und rechts) */
+}
+
+
+header h1 {
+  margin-top: 0.5em;
+  font-weight: normal;
+  /* Schlagschatten */
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
+   /* Animationsübergang */
+   opacity: 0;
+   transform: translateY(-50px);
+   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+ }
+
+ header h1.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+  h2 {
+    font-size: 3.5em;
+  }
+
+
+
+  p {
+    width: 23.125em;
+    
+  }
+  .regular {
+    font-weight: normal; /* Normale Schrift (regular) */
+    font-size: 1.5em; /* Schriftgröße von 1.875em */
+  }
+  .regular-font {
+    font-weight: normal;
+    margin-top: 2em;
+  }
+  
+  .semibold {
+    font-weight: 600; /* Halbfette Schrift (semibold) */
+    margin: 0;
+  }
+  
+
+
+  .svg-icon {
+    width: 3.5em;
+    height: 3.5em;
+   
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:auto;
+  }
+  
+
+  
+  .color-dots {
+    display: flex;
+    gap: 10px; /* Passe den Abstand zwischen den Farbdots an */
+  }
+  
+  .color-dot {
+    width: 20px; /* Passe die Größe der Farbdots an */
+    height: 20px; /* Passe die Größe der Farbdots an */
+    border-radius: 50%;
+    /* Weitere Styling-Eigenschaften für die Farbdots */
+  }
+  
+
+  .dodecahedron {
+    flex-basis: 100%; /* Nimmt die volle Breite */
+    background-color: #ccc; /* Standardfarbe des Dodekahedrons */
+    /* Weitere Styling-Eigenschaften für das Dodekahedron */
+  }
+
+
+#buttons {
+  
+  display:flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: black;
+  border-color: black;
+  border-radius: 5px;
+  margin-top: -4em;
+}
+#container {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -9em;
+  margin-bottom: -2em;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Scroll-Animation */
+
+
+
+
+
+
+
+
+
+
+
+
+/* Video */
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container video {
+  position: absolute;
+  top: 6.25em;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Bilder + Text */
+
+.image-text-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 5.25em;
+  width: 100%;
+  height: fit-content;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+  transform: translateX(-100%);
+}
+
+.image-text-container.from-right {
+  transform: translateX(100%);
+}
+
+.image-text-container.visible {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.image-text-container > *:not(:last-child) {
+  margin-right: 3.125em; /* Abstand zwischen dem Container von img und text */
+}
+
+.image-text-container img {
+  width: 50%;
+  object-fit: scale-down;
+   /* Add right margin to create spacing */
+}
+
+.image-text-container .text {
+  flex: 1;
+  width: 50%;
+}
+
+.image-text-container h2 {
+  margin: 0;
+  font-size: 3.5em;
+  font-weight: 500;
+  width: 100%;
+}
+
+.image-text-container p {
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.text {
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabelle*/
+
+.table-container {
+  width: 50%;
+  float: left;
+}
+
+
+
+.table-container table {
+  font-size: 1.5em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container td {
+  padding: 10px;
+  border: 1px solid black;
+  border-bottom: 1px solid white;
+}
+
+.table-container table :first-child td {
+  border-top: 1px solid white;
+  border-collapse: collapse;
+
+}
+
+.table-image {
+  width: 50%;
+  float: right;
+  margin-top: -9em;
+ 
+  transition: opacity 1s ease-in-out;
+}
+
+.hidden {
+  opacity: 0; /* Setze die Anfangsopazität auf 0 */
+}
+
+
+#sizeVariable,
+#areaVariable,
+#soundPowerVariable,
+#frequencyRangeVariable,
+#micCharVariable,
+#bluetoothPowerVariable {
+  color: #037CC2;
+  text-align: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Slider*/
+
+.slider {
+  margin-bottom: 7em;
+}
+.slider-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 12.5em;
+  padding-bottom: 3em;
+}
+
+.slider-image {
+  flex-shrink: 0;
+  width: 28%;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+}
+
+.slider-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.slider-image:first-child {
+  transform: scale(0.72);
+  top: -60px;
+}
+
+.slider-image:last-child {
+  transform: scale(0.72);
+  top: -60px;
+}
+
+
+
+
+
+.arrow-buttons {
+  top: 2em;
+  position: relative;
+  display: flex;
+  justify-content:space-evenly;
+  width: 100%;
+  
+ 
+}
+
+
+.left-arrow,
+.right-arrow {
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.left-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='0.5' stroke='currentColor' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z' filter='invert(1)' /%3E%3C/svg%3E");
+}
+
+.right-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='0.5' stroke='currentColor' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z' filter='invert(1)' /%3E%3C/svg%3E");
+}
+
+
+
+.button-container {
+
+ 
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* Buttons untereinander anordnen */
+  align-items: center;
+}
+
+.buy-button,
+.compare-button {
+  margin-top: 8px;
+  width: 8em; /* Breite der Buttons */
+  height: 2em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.buy-button {
+  padding-bottom: 0.2em;
+  margin-top: 1em;
+  background-color: #1FB01C;
+  color: white;
+  font-size: 2.25em;
+  font-weight: 600; /* Semibold */
+  font-family: 'Exo 2', sans-serif;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.compare-button {
+  background-color: #037CC2;
+  color: white;
+  font-size: 2.25em;
+  font-weight:lighter;
+
+}
+
+.arrow-buttons button:hover {
+  cursor: pointer; /* Set the cursor style to pointer */
+  filter: brightness(85%); /* Apply a brightness filter to make it slightly darker */
+}
+
+.buy-button {
+  /* Previous CSS properties */
+
+  background: linear-gradient(to right, #1FB01C 0%, #1FB01C 50%, white 50%);
+  background-size: 200% 100%;
+  transition: background-position 0.3s, color 0.3s; /* Add color transition */
+}
+
+.buy-button:hover {
+  background-position: -100% 0;
+  color: #1FB01C; /* Set text color to green when hovered */
+}
+
+.compare-button {
+  /* Previous CSS properties */
+
+  background: linear-gradient(to right, #037CC2 0%, #037CC2 50%, white 50%);
+  background-size: 200% 100%;
+  transition: background-position 0.3s, color 0.3s; /* Add color transition */
+}
+
+.compare-button:hover {
+  background-position: -100% 0;
+  color: #037CC2; /* Set text color to green when hovered */
+}
+
+
+
+
+  /* mobile ansicht */ 
+
+  @media (max-width: 480px) {
+    /* Body */
+    body {
+      padding: 1rem;
+    }
+  
+    /* Container */
+    .container {
+      width: 100%;
+    }
+  
+    /* Navigationsleiste */
+    nav {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0.938em;
+      padding-right: 0.938em;
+    }
+  
+    nav ul {
+      justify-content: center;
+    }
+  
+    nav ul li:first-child {
+      margin-right: 0;
+    }
+  
+    nav ul li:last-child {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  
+    /* Header */
+    header {
+      margin-top: -1.5em;
+      padding: 1rem;
+    }
+  
+    .header-content {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  
+    /* Main */
+    main {
+      padding: 2rem;
+    }
+  
+    /* Footer */
+    footer {
+      flex-direction: column;
+    }
+  
+    .icons {
+      margin-bottom: 1rem;
+    }
+  
+    .horizontal-icons {
+      width: 100%;
+    }
+  
+    .footer ul {
+      margin-left: 0;
+      height: auto;
+    }
+  
+    .footer li a:last-child {
+      margin-right: 0;
+    }
+  
+    .impressum {
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+  
+    /* Überschriften */
+    h1 {
+      font-size: 3.5em;
+    }
+  
+    /* Bilder + Text */
+    .image-text-container {
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+  
+    .image-text-container img {
+      width: 100%;
+    }
+  
+    .image-text-container .text {
+      width: 100%;
+    }
+  
+    /* Tabelle */
+    .table-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  
+    /* Slider */
+    .slider-container {
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+    }
+  
+    .slider-image {
+      width: 100%;
+    }
+  
+    .arrow-buttons {
+      top: 0;
+      position: relative;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+  
+
+
+
+
