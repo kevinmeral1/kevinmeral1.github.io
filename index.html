@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://threejs.org/build/three.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="https://threejs.org/examples/js/loaders/GLTFLoader.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> 
+  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
+  ></script>
+
+</head>
+<body>
+  
+ 
+
+  <header>
+    <nav>
+      <!-- Navigationsleiste -->
+      <ul>
+        <li><a href="#" id="logoLink"><img src="Logo.png" alt="logo"></a></li>
+        <li><a href="#" id="leftIconLink"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="leftIcon" class="svg-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg></a></li>
+            
+        <li><a href="#" id="rightIconLink"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="rightIcon" class="svg-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg></a></li>
+      </ul>
+    
+      <!-- öffnende Navigationsleiste -->
+      <ul class="nav-list">
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Unternehmen</a></li>
+      </ul>
+    
+      <!-- Anmeldefeld -->
+      <div id="loginField">
+        <input type="text" placeholder="Benutzername">
+        <input type="password" placeholder="Passwort">
+        <button class="login-button">Anmelden</button>
+      </div>
+    </nav>
+    
+    <!-- Header-Bereich -->
+
+    <h1>Der Dodecaheiser</h1>
+
+    <div id="container"></div>
+    
+      <div id="buttons">
+        <button id="button1" style="background-color: black;"></button>
+        <button id="button2" style="background-color: white;"></button>
+        <button id="button3" style="background-color: green;"></button>
+        <button id="button4" style="background-color: blue;"></button>
+      </div>
+
+
+
+  </header>
+  <div class="container">
+    <main class="main">
+      <div class="scroll-animation">
+        
+        <!-- Hauptinhalt -->
+        
+          <h2 class="semibold">360°-Klang</h2>
+          <p class="regular">Durch die besondere dodekaederförmige Struktur des Lautsprechers könnte er in der Lage sein, den Klang in alle Richtungen gleichmäßig zu verteilen.</p>
+          <h2 class="semibold">Design</h2>
+          <p class="regular">Ein Auge auf Ästhetik ist unser Grundgedanke, bei der Gestaltung unseres Dodecahedrons</p>
+          <h2 class="semibold">Akkubetrieb</h2>
+          <p class="regular">Unser Team von Experten hat es geschafft eine Akkulaufzeit von satten 196h zu erreichen.</p>
+          <h2 class="semibold">Einseitige Beschallung</h2>
+          <p class="regular">Unser Team von Experten hat es geschafft eine Akkulaufzeit von satten 196h zu erreichen.</p>
+          <h2 class="semibold">Stereo-Mikrofon</h2>
+          <p class="regular">Die 12 Flächen unseres Dodechedrons ermöglichen es, die Umgebungsgeräusche von jeglichem Winkelgrad aufzunehmen.</p>
+          <h2 class="semibold">Noise-Cancelling</h2>
+          <p class="regular">Da eine symmetrische Anzahl von Flächen gewährleistet ist, kann der Schall im Raum oder vom Lautsprecher selbst ausgelöscht werden.</p>
+      </div>
+
+
+
+
+
+      
+      
+<!-- Video -->
+
+    <div class="video-container">
+      <video src="pexels-benjamin-hastings-17209196-3840x2160-30fps.mp4" controls></video>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+<!-- Bilder + Texte-->
+
+<div class="image-text-container">
+  <img src="Rectangle 34.png" alt="Bild">
+  <div class="text">
+    
+    <h2>Persönlicher Fitnesstrainer</h2>
+    <p>Nehm doch unseren Dodecaheisser mit zum Training und lass dich von deinen Lieblingssongs motivieren deine Bestleistung zu übertreffen. Egal ist dabei, ob dieser  voller Schweiß, Wasser oder Hitze ausgesetzt ist. Dank seiner Carbonhülle hält dieser härteren Außeneinwirkungen stand.</p>
+  </div>
+</div>
+
+<div class="image-text-container from-right">
+  <div class="text">
+    <h2>Außergwöhnliches Ambiente</h2>
+    <p>Durch seinen perfekten Klang, kann jede Umgebung einen passendes Gefühl gegeben werden. Dies gelingt, indem der komplette Raum beschallt wird.</p>
+  </div>
+  <img src="Party.png" alt="Bild">
+</div>
+
+<div class="image-text-container">
+  <img src="Hügel.png" alt="Bild">
+  <div class="text">
+    <h2>Unvergessliche Momente</h2>
+    <p>Auch bei längeren Ausflügen macht der Dodecaheiser nicht schlapp, da seine Akku
+      -Ionen wochenlang funktionstüchtig sind. Weiteres ist sein unauffäliges Erscheinungsbild, welches einzigartige und authentische Momente entstehen lassen. </p>
+  </div>
+</div>
+
+<div class="image-text-container from-right">
+  <div class="text">
+    <h2>Erfoglshohe Leistungssteigerung</h2>
+    <p>Dank Noise-Cancelling kann jedes Meeting in Ruhe stattfinden, auch dann wenn sich jemand einen Kaffee zubereitet. Durch seine Stereo-Mikrofonie kann der Dodecaheiser perfekt jeden Konferenzteilnehmer aufnehmen.</p>
+  </div>
+  <img src="Work.jpg" alt="Bild">
+</div>
+
+
+
+
+
+
+
+
+
+
+<h2 class="regular-font">Technische Daten</h2>
+<img src="Rectangle 34 (1).png" alt="Bildbeschreibung" class="table-image hidden">
+
+<div class="table-container">
+  <!-- Tabelle -->
+
+  <table>
+    <tr>
+      <td>Größe</td>
+      <td id="sizeVariable">0m</td>
+    </tr>
+    <tr>
+      <td>Flächen</td>
+      <td id="areaVariable">0m<sup>2</sup></td>
+    </tr>
+    <tr>
+      <td>Schalleistung</td>
+      <td id="soundPowerVariable">0dB</td>
+    </tr>
+    <tr>
+      <td>Frequenzbereich</td>
+      <td id="frequencyRangeVariable">0Hz</td>
+    </tr>
+    <tr>
+      <td>Mikrofoncharakteristik</td>
+      <td id="micCharVariable">kugelförmig</td>
+    </tr>
+    <tr>
+      <td>Bluetooth-Ausgangsleistung</td>
+      <td id="bluetoothPowerVariable">0W</td>
+    </tr>
+    <!-- Weitere Konstanten und Variablen -->
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Slider -->
+    <div class="slider">
+    <div class="slider-container">
+      <div class="slider-image">
+        <img src="Frame (1).png" alt="Bild 1">
+        <div class="button-container">
+          <button class="buy-button">Jetzt Kaufen</button>
+          <button class="compare-button">Vergleichen</button>
+        </div>
+      </div>
+      <div class="slider-image">
+        <img src="Vector.png" alt="Bild 2">
+        <div class="button-container">
+          <button class="buy-button">Jetzt Kaufen</button>
+          <button class="compare-button">Vergleichen</button>
+        </div>
+      </div>
+      <div class="slider-image">
+        <img src="Download.png" alt="Bild 3">
+        <div class="button-container">
+          <button class="buy-button">Jetzt Kaufen</button>
+          <button class="compare-button">Vergleichen</button>
+        </div>
+      </div>
+    </div>
+    <div class="arrow-buttons">
+      <button class="left-arrow"></button>
+      <button class="right-arrow"></button>
+    </div>
+  </div>
+  
+
+    
+  <div id="container2">
+    <div id="pentagon">
+      <div class="face" id="face1"></div>
+      <div class="face" id="face2"></div>
+      <div class="face" id="face3"></div>
+      <div class="face" id="face4"></div>
+      <div class="face" id="face5"></div>
+    </div>
+  </div>
+
+
+
+
+  </main>
+  
+  
+  
+  
+  
+  
+
+</div>
+
+  <footer>
+    <!-- Footer-Bereich -->
+    <div class="footer">
+      <!-- Navigationsleiste -->
+      <ul>
+        <li><a>Shop</a><a>Unternehmen</a></li>
+        <li><a>Übersicht</a><a>Standorte</a></li>
+        <li><a>Angebote</a><a><div></div></a><a>Über uns</a></li>
+        <li><a>Zubehör</a><a>Partner</a></li>
+        <li><a>Service</a><a>News</a></li>
+      </ul>
+    </div>
+  
+    <div class="icons">
+      <div class="horizontal-icons">
+        <div class="icon"><img src="image 1.png" alt=""></div>
+        <div class="icon"><img src="image 2.png" alt=""></div>
+        <div class="icon"><img src="image 3.png" alt=""></div>
+      </div>
+    </div>
+  
+    <div class="impressum">
+      <p>Impressum</p>
+      <p>Kontakt</p>
+      <p>Datenschutz</p>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+ 
+
+</body>
+
+</html>
+
