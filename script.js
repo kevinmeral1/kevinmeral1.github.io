@@ -288,7 +288,7 @@ window.addEventListener("DOMContentLoaded", checkTableImageVisibility);
 const slides = document.querySelectorAll('.slider-image');
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
-let currentIndex = 1;
+let currentIndex = 0; // Initialize the current index to 0
 
 function swapPositions(slide1, slide2) {
   slide1.style.transform = 'scale(0.72)';
@@ -300,20 +300,29 @@ function swapPositions(slide1, slide2) {
 
 function showSlide() {
   slides.forEach((slide, index) => {
-    if (index === currentIndex) {
+    if (slides.length <= 1) {
+      slide.style.display = 'block';
+    } else if (index === currentIndex) {
       slide.style.transform = 'scale(1)';
       slide.style.top = '0';
-    } else if (index === (currentIndex + 1) % slides.length) {
-      slide.style.transform = 'scale(0.72)';
-      slide.style.top = '-60px';
+      slide.style.display = 'block';
     } else {
       slide.style.transform = 'scale(0.72)';
       slide.style.top = '-60px';
+      if (window.innerWidth >= 958) {
+        slide.style.display = 'block';
+      } else {
+        slide.style.display = 'none';
+      }
     }
   });
 }
 
 function nextSlide() {
+  if (slides.length <= 1) {
+    return; // Do not proceed if there is only one slide
+  }
+  
   const nextIndex = (currentIndex + 1) % slides.length;
   currentIndex = nextIndex;
   swapPositions(slides[currentIndex], slides[nextIndex]);
@@ -321,16 +330,36 @@ function nextSlide() {
 }
 
 function previousSlide() {
-  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+  if (slides.length <= 1) {
+    return; // Do not proceed if there is only one slide
+  }
   
+  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
   swapPositions(slides[currentIndex], slides[prevIndex]);
   currentIndex = prevIndex;
   showSlide();
 }
 
-
 leftArrow.addEventListener('click', previousSlide);
 rightArrow.addEventListener('click', nextSlide);
+
+// Initially show the appropriate slide based on screen size
+function updateSlideDisplay() {
+  const screenWidth = window.innerWidth;
+  if (screenWidth < 958) {
+    showSlide();
+  } else {
+    slides.forEach((slide) => {
+      slide.style.display = 'block'; // Show all slides when screen size is larger
+    });
+  }
+}
+
+window.addEventListener('load', updateSlideDisplay);
+window.addEventListener('resize', updateSlideDisplay);
+
+
+
 
 
 

@@ -141,7 +141,7 @@ margin-bottom: 2em;
 form {
 display: none; /* Initially hide the login field */
 position: absolute;
-top: 2em;
+top: 1.5em;
 right: 10em; /* Adjust the position as per your requirements */
 display: flex;
 align-items: center;
@@ -220,6 +220,7 @@ border: black;
 border-color: black;
 border-radius: 20px;
 margin-top: -4em;
+cursor: pointer;
 }
 
 #container {
@@ -940,10 +941,6 @@ footer {
   }
 
 
-  .slider-container {
-    padding-top: 8.125em;
-    padding-bottom: 3em;
-  }
 
   .left-video,
   .right-video {
@@ -1116,11 +1113,10 @@ label, input {
 
 @media (max-width: 1068px) {
 
- /* main {
-    margin-right: 2.5em;
+  main {
+    margin: 2.5em;
   }
-*/
-
+  
 }
 
 
@@ -1128,7 +1124,16 @@ label, input {
 
 
 @media (max-width: 1043px) {
+  .image-text-container{
+   flex-direction: row;
+   justify-content: center;
   
+  }
+
+  
+  .slider {
+    max-width: 100%;
+  }
   .text .semibold {
     font-size: 2.2em;
     
@@ -1142,16 +1147,80 @@ label, input {
 }
 
 @media (max-width: 958px) {
+  #bild {
+    width: 100%;
+  }
+  .table-container {
+    width: 100%;
+  }
+ #text1 {
+  width: 35em;
+ }
+ #text2 {
+  width: 18em;
+ }
+ #text3 {
+  width: 18em;
+ }
+ #text4 {
+  width: 18em;
+ }
 
+  .image-text-container.visible {
+    
+    width: 680px;
+    height: auto;
+   
+  }
+
+  .container{
+    margin: auto;
+    
+    align-items: center;
+  }
+  
+  #unterstes-bild {
+    margin-bottom: 25em;
+  }
+
+
+ #tabelle-bild {
+  margin-top: -25em;
+  padding-top: 8em;
+ align-items: center;
+ margin-right: 13em;
+ width: 70%;
+ 
+.text {
+  width: 100%;
+  height: auto;
+}
+
+ }
 .image-text-container{
 
   flex-direction: column;
   margin: 0;
+  max-width: 100%;
+  
+
 }
+ #sport-bild {
+  max-width: 400%;
+  
+ }
+
 .breite {
   margin-top: -7em;
   
 }
+
+.slider-container {
+  width: 100%;
+  justify-content: center;
+  
+}
+
 
 .breite h2{
   color: #1FB01C;
@@ -1161,24 +1230,47 @@ label, input {
   color: white;
 
 }
+ 
 #zuschnitt-bild #zuschnitte2 {
   height: 1000px;
+  
 }
 #zuschnitte2 {
   margin-top: -8em;
+  
   
 }
 #runterziehen {
   z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
   position: relative;
   margin-bottom: -40em;
-  margin-top: 12em;
+  margin-top: 13em;
+  
+}
+#runterziehen2 {
+  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  position: relative;
+  margin-bottom: -40em;
+  margin-top: 8em;
+  width: 25em;
+  
 }
 
 #zuschnitte3 {
   margin-top: 2em;
 }
+
+.video-container {
+  max-width:100%;
+  height: 10em;
 }
+.slider-image {
+  width: 100%;
+  margin-top: -5em;
+}
+
+}
+
 
 
 @media (max-width: 895px) {
@@ -1238,7 +1330,11 @@ h1 {
 #container {
   max-width: 100%;
   height: 91vh;
-  
+
+  .slider-image {
+    width: 100%;
+    margin-top: -5em;
+  }
 }
 
 }
@@ -1257,7 +1353,33 @@ h1 {
 
 
 
+@media (max-width: 728px) {
 
+#runterziehen {
+  
+  position: relative;
+  margin-bottom: -40em;
+  margin-top: 12em;
+  width: 20em;
+}
+#runterziehen2 {
+  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  position: relative;
+  margin-bottom: -40em;
+  margin-top: 4em;
+  width: 20em;
+  
+}
+#runterziehen3 {
+ 
+  width: 20em;
+  
+}
+.slider-image {
+  width: 100%;
+  margin-top: -5em;
+}
+}
 
 
 
@@ -1306,8 +1428,8 @@ h1 {
   /* Body */
  
   #dodecahedron {
-    width: auto;
-    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     flex: 1; /* Nimmt die volle Breite */
     background-color: #ccc; /* Standardfarbe des Dodekahedrons */
     /* Weitere Styling-Eigenschaften für das Dodekahedron */
@@ -1317,6 +1439,7 @@ h1 {
     #container {
       max-width: 100%;
       height: 93vh;
+      
       
       
     }
@@ -1355,7 +1478,7 @@ label, input {
 
   /* Main */
   main {
-    padding: 0;
+    
     max-width: 80%;
   }
 
@@ -1387,7 +1510,99 @@ label, input {
     
     
   /* Überschriften */
+p.regular {
+  width: 17em;
+  
+}
+#nach-links-h2 {
+  margin-left: -3.3em;
+  margin-top: -3em;
+}
+#nach-links {
+  margin-left: -6em;
+  margin-bottom: -2em;
+}
+#nach-links-h2-2 {
+  margin-left: -4.65em;
+  margin-top: -1em;
+}
+#nach-links-2 {
+  margin-left: -8.4em;
+  margin-bottom: -2em;
+}
+#nach-links-h2-3 {
+  margin-left: -4.15em;
+  margin-top: 2em;
+}
+#nach-links-3 {
+  margin-left: -7.7em;
+  margin-bottom: -2em;
+}
 
+#nach-links-h2-4 {
+  margin-left: 0.8em;
+  margin-top: -3em;
+}
+#nach-links-4 {
+  
+  
+  margin-left: 1.5em;
+  margin-bottom: 7em;
+}
+
+
+
+
+
+
+h2.semibold {
+  width: 20em;
+  
+}
+.left-video {
+  margin-bottom: -5em;
+ 
+}
+
+.slider-image {
+  width: 100%;
+  margin-top: -5em;
+}
+
+#bild {
+  width: 100%;
+}
+#text1 {
+  width: 18em;
+ }
+ #text2 {
+  width: 18em;
+ }
+ #text3 {
+  width: 18em;
+ }
+ #text4 {
+  width: 18em;
+ }
+ form {
+  display: none; /* Initially hide the login field */
+  position: absolute;
+  top: 1.5em;
+  right: 10em; /* Adjust the position as per your requirements */
+  display: flex;
+  align-items: center;
+  width: 1%;
+  height: 1%;
+  
+  
+  }
+  #bild {
+    margin-top: 3em;
+  } 
+  .video-container {
+    margin-bottom: -4em;
+    margin-top: -2em;
+  }
 
 }
 
