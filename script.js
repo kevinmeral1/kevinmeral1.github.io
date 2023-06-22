@@ -91,7 +91,7 @@ ground.rotation.x = -Math.PI / 2; // Rotiere den Boden um 90 Grad entlang der x-
 ground.receiveShadow = true;
 scene.add(ground);  
 
-camera.position.z = dodecahedronRadius * 5;
+camera.position.z = dodecahedronRadius * 3;
 
 function animate() {
   requestAnimationFrame(animate);
@@ -137,15 +137,15 @@ button1.addEventListener('click', function() {
 });
 
 button2.addEventListener('click', function() {
-  dodecahedron.material.color.set(0xffffff); // Setze die Farbe des Dodekaeders auf Weiß
+  dodecahedron.material.color.set(0x999999); // Setze die Farbe des Dodekaeders auf Weiß
 });
 
 button3.addEventListener('click', function() {
-  dodecahedron.material.color.set(0x00ff00); // Setze die Farbe des Dodekaeders auf Grün
+  dodecahedron.material.color.set(0x1FB01C); // Setze die Farbe des Dodekaeders auf Grün
 });
 
 button4.addEventListener('click', function() {
-  dodecahedron.material.color.set(0x0000ff); // Setze die Farbe des Dodekaeders auf Blau
+  dodecahedron.material.color.set(0x037CC2); // Setze die Farbe des Dodekaeders auf Blau
 });
 
 
@@ -365,29 +365,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
- // Function to check if an element is in the viewport
- function isInViewport(element) {
-  var rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
 
-// Function to add a CSS class when an element is in the viewport
-function addAnimationOnScroll() {
-  var elements = document.querySelectorAll('.main-content .links, .main-content .rechts');
 
-  elements.forEach(function(element) {
-    if (isInViewport(element)) {
-      element.classList.remove('animate');
+
+
+
+
+window.addEventListener("scroll", function() {
+  var containers = document.querySelectorAll(".main-content .image-text-container");
+  var windowHeight = window.innerHeight;
+
+  containers.forEach(function(container) {
+    var rect = container.getBoundingClientRect();
+    var topVisible = rect.top > -290 && rect.top < windowHeight;
+    var bottomVisible = rect.bottom > 170 && rect.bottom < windowHeight;
+
+    if (!topVisible || !bottomVisible) {
+      container.style.visibility = "hidden";
     } else {
-      element.classList.add('animate');
+      container.style.visibility = "visible";
     }
   });
-}
-
-// Add the scroll event listener
-window.addEventListener('scroll', addAnimationOnScroll);
+});

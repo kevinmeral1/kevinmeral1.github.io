@@ -23,6 +23,7 @@ margin: 0 auto;
 display: flex;
 justify-content: center;
 align-items: center;
+height: auto;
 
 } 
  
@@ -53,15 +54,14 @@ nav {
   margin-right: 1.875em;
 
   /* Innerer Abstand */
-
-  padding-top: 0.188em;
-  padding-bottom: 0.563em;
-  padding-left: 1.188em;
+  height: 65px;
+  
+  padding-bottom: 0.403em;
+  padding-left: 0.588em;
 
   /* Kanten und Schatten */
 
-  border-radius: 4px;
-  box-shadow: 0 0 12px black;
+  border-radius: 7px;
   overflow: hidden; /* Versteckt den Inhalt, der über die Höhe hinausgeht */
   transition: max-height 0.5s ease;
 }
@@ -71,6 +71,7 @@ nav {
 nav ul {
   list-style-type: none;
   margin: 0;
+  
   padding: 0;
   display: flex;
   justify-content: flex-end;
@@ -79,15 +80,17 @@ nav ul {
 
 nav ul li:first-child {
   margin-right: auto;
+  margin-top: -0.05em;
 }
 nav ul li:last-child {
   margin-right: 20px; /* Passe den gewünschten Abstand an */
+  
 }
 
 nav ul li {
   display: inline;
   margin-left: 10px;
-  margin-top: 5px; /* Passe den gewünschten Abstand an */
+  
   }
 
 nav ul li a {
@@ -160,10 +163,6 @@ input[type="submit"] {
 
 
 
-
-
-
-
 /* Header */
 
 header {
@@ -190,6 +189,9 @@ background-color: #ccc; /* Standardfarbe des Dodekahedrons */
 box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Hinzufügen eines Schattens */
 
 }
+#button2 {
+  background-color: #999999;
+}
 
 
 #buttons {
@@ -205,14 +207,14 @@ height: 40px;
 margin-right: 10px;
 border: black;
 border-color: black;
-border-radius: 5px;
+border-radius: 20px;
 margin-top: -4em;
 }
 
 #container {
 max-width: 99.2%;
 
-height: 85vh;
+height: 88vh;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -250,6 +252,7 @@ margin-bottom: -2em;
 
 main {
   padding: 5rem;
+  width: 100%;
 }
 
 
@@ -313,7 +316,7 @@ footer {
   align-items: center;
   color: white;
   margin-bottom: 1.125em;
-  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  
   height: 40px;
 }
 
@@ -346,6 +349,7 @@ color: #ccc; /* Set the hover color to a darker shade */
 cursor: pointer; /* Set the cursor style to pointer */
 margin-top: 5px; /* Add a margin of 5 pixels at the top */
 border-bottom: 2px solid #037CC2; /* Add a blue bottom border */
+
 }
 
 .footer .icon:hover {
@@ -388,8 +392,6 @@ border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
 
 
 
-
-
 /* Font */
 
 
@@ -400,7 +402,7 @@ border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
 
 /* Überschriften */
 h1 {
-font-size: 5.5em;
+font-size: 4.5em;
 color: black;
 text-align: center; /* Text zentrieren */
 margin: 0 auto; /* Automatischer äußerer Abstand (links und rechts) */
@@ -410,8 +412,7 @@ margin: 0 auto; /* Automatischer äußerer Abstand (links und rechts) */
 header h1 {
 margin-top: 0.5em;
 font-weight: normal;
-/* Schlagschatten */
-text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
 
  /* Animationsübergang */
  opacity: 0;
@@ -492,84 +493,29 @@ p {
 }
 
 
+.image-text-container video {
+  width: 50%;
+  object-fit: scale-down;
+  }
 
 
 
+/* Scroll Content */
 
 
-.main-content {
-  margin-top: 10em;
+
+.text .semibold {
+  padding-top: 3em;
+  font-size: 4.5em;
 }
 
-.left-video {
-  max-width: 25%;
-  margin: 0;
-  margin-left: 36em;
-  margin-top: -6em;
-  padding-bottom: 1em;
+.text .regular {
+  font-size: 2.2em;
 }
 
-.right-video {
-  max-width: 120%;
-  margin: 0;
-  margin-left: -40em;
-  margin-top: -9em;
-  
-}
-
-.main-content p {
-  margin-top: -11em;
-  width: 20%;
-}
-.main-content h2 {
-  width: 25%;
-}
-
-
-.rechts {
-  
-margin-left: 76.375em;
-margin-top: 10em;
-margin-bottom: 10em;
-width: 150%
-margin: 0;
-}
-
-.links {
-  margin-top: 10em;
-  margin-bottom: 10em;
-  margin: 0;
-}
-
-.rechts p {
-  width: 90%;
-  margin-top: -9em;
-}
-
-.links h2.semibold {
-  margin-top: 5em;
-}
-
-.rechts h2.semibold {
-  margin-top: 5em;
-}
-
- /* CSS styles for the animation */
- .animate {
-  opacity: 0;
-  transform: translateY(200px);
-  transition: opacity 0.5s ease-out, transform 2s ease-out;
-}
-
-.animate.animate-visible {
-  opacity: 0;
-  transform: translateY(0);
-}
-
-
-
-
-
+.main-content .image-text-container > *:last-child {
+  margin-right: 3.1025em;
+  }
 
 
 
@@ -580,18 +526,23 @@ margin: 0;
 .video-container {
 position: relative;
 padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-height: 0;
+height: auto;
 overflow: hidden;
+max-width: 100%;
 }
 
 .video-container video {
 position: absolute;
 top: 6.25em;
 left: 0;
-width: 100%;
-height: 100%;
+max-width: 100%;
+height: auto;
 }
 
+video {
+  max-width: 100%;
+  height:auto;
+}
 
 
 
@@ -657,10 +608,13 @@ width: 100%;
 
 .text {
 height: auto;
+max-width: 100%;
 }
 
 
-
+.abstand {
+  padding-top: 4em;
+}
 
 
 
@@ -678,7 +632,7 @@ height: auto;
 
 .table-container {
 width: 50%;
-float: left;
+
 }
 
 
@@ -704,7 +658,8 @@ border-collapse: collapse;
 .table-image {
 width: 50%;
 float: right;
-margin-top: -12em;
+margin-top: 4.5em;
+display: inline-block;
 
 transition: opacity 1s ease-in-out;
 }
@@ -726,13 +681,33 @@ text-align: right;
 
 
 
+/* Kundenrezesnionen */
+
+#beruf {
+  font-size: 2.1em;
+  font-weight: 500;
+}
+
+#zuschnitt-bild img {
+  width: 450px;
+  height: auto;
+}
+
+#zuschnitte {
+  margin-bottom: -300px;
+}
+#zuschnitte2 {
+  margin-bottom: -300px;
+  
+}
+#zuschnitte3 {
+  margin-bottom: -300px;
+}
 
 
-
-
-
-
-
+.text {
+  margin-left: 1em;
+}
 
 
 
@@ -741,6 +716,7 @@ text-align: right;
 
 .slider {
 margin-bottom: 7em;
+max-width: 100%;
 }
 .slider-container {
 width: 100%;
@@ -841,7 +817,7 @@ color: white;
 font-size: 2.25em;
 font-weight: 600; /* Semibold */
 font-family: 'Exo 2', sans-serif;
-text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
 
 }
 
@@ -929,36 +905,32 @@ footer {
 
 
 
+@media (max-width: 1780px) {
 
+   #noise-h2 {
+    margin-top: -2em;
+  }
+
+  .text .semibold {
+    margin-top: -1em;
+  }
+
+ 
+
+}
 
 
 
 @media (max-width: 1560px) {
-  .image-text-container {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .image-text-container > *:not(:last-child) {
-    margin-right: 0;
-    margin-bottom: 3.125em;
-  }
-
-  .image-text-container img {
-    width: 100%;
-    max-width: 600px; /* Passe die maximale Breite des Bildes an deine Bedürfnisse an */
-  }
 
   .image-text-container .text {
     max-width: 100%;
   }
 
-  .table-container {
-    width: 100%;
-  }
 
   .slider-container {
-    padding-top: 3.125em;
+    padding-top: 8.125em;
     padding-bottom: 3em;
   }
 
@@ -969,18 +941,35 @@ footer {
     margin-top: 0;
     margin-bottom: 2em;
   }
-  .video-container {
+
+  .table-image hidden {
+    
     max-width: 100%;
-    max-height: 100vh;
-    overflow: hidden;
   }
   
-  .video-container video {
-    width: 100%;
-    height: auto;
+}
+
+
+@media (max-width: 1500px) {
+
+  .text .semibold {
+    font-size: 2.9em;
+    margin-top: 1.4rem;
   }
-  
-  
+
+  .text .regular {
+    font-size: 1.7em;
+ 
+  }
+
+  #noise-h2 {
+    margin-top: 0.5rem;
+  }
+
+  #tabelle-bild{
+    padding-top: 5em;
+  }
+
 }
 
 
@@ -990,15 +979,77 @@ footer {
 
 
 
+@media (max-width: 1445px) {
+
+  .text h2 {
+    font-size: 2.5em;
+  }
+  #beruf {
+    font-size: 1.85em;
+  }
+
+  .text p {
+    font-size: 1.25em;
+  }
+
+
+  .text .semibold {
+    font-size: 2.9em;
+    margin-top: 1.4rem;
+  }
+
+  .text .regular {
+    font-size: 1.7em;
+ 
+  }
+
+
+  #technische-daten {
+    font-size: 2.5em;
+  }
+  #sizeVariable,
+#areaVariable,
+#soundPowerVariable,
+#frequencyRangeVariable,
+#micCharVariable,
+#bluetoothPowerVariable {
+font-size: 0.9em;
+}.table-container td {
+  font-size: 0.9em;
+}
 
 
 
+}
+
+@media (max-width: 1267px) {
+
+
+  .text h2 {
+    font-size: 2.25em;
+  }
+
+  .text p {
+    font-size: 1.15em;
+  }
 
 
 
+}
 
 
+@media (max-width: 1280px) {
 
+  .text .semibold {
+    font-size: 2.5em;
+  }
+
+  .text .regular {
+    font-size: 1.4em;
+ 
+  }
+
+}
 
 
 
@@ -1044,6 +1095,72 @@ label, input {
 
 
 
+
+@media (max-width: 1068px) {
+
+ /* main {
+    margin-right: 2.5em;
+  }
+*/
+
+}
+
+
+
+
+
+@media (max-width: 1043px) {
+  
+  .text .semibold {
+    font-size: 2.2em;
+    
+  }
+
+  .text .regular {
+    font-size: 1.2em;
+ 
+  }
+
+}
+
+@media (max-width: 958px) {
+
+.image-text-container{
+
+  flex-direction: column;
+  margin: 0;
+}
+.breite {
+  margin-top: -7em;
+  
+}
+
+.breite h2{
+  color: #1FB01C;
+}
+
+.breite p {
+  color: white;
+
+}
+#zuschnitt-bild #zuschnitte2 {
+  height: 1000px;
+}
+#zuschnitte2 {
+  margin-top: -8em;
+  
+}
+#runterziehen {
+  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  position: relative;
+  margin-bottom: -40em;
+  margin-top: 12em;
+}
+
+#zuschnitte3 {
+  margin-top: 2em;
+}
+}
 
 
 @media (max-width: 895px) {
@@ -1093,13 +1210,29 @@ label, input {
 
 
 
+@media (max-width: 840px) {
+h1 {
+  font-size: 3em;
+}
+#container {
+  max-width: 100%;
+  height: 91vh;
+  
+}
 
+}
 
+@media (max-width: 580px) {
+  h1 {
+    font-size: 2.2em;
+  }
 
-
-
-
-
+  #container {
+    max-width: 100%;
+    height: 93vh;
+    
+  }
+}
 
 
 
@@ -1150,14 +1283,27 @@ label, input {
 
 @media (max-width: 480px) {
   /* Body */
-  body {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+ 
+  #dodecahedron {
+    width: auto;
+    height: auto;
+    flex: 1; /* Nimmt die volle Breite */
+    background-color: #ccc; /* Standardfarbe des Dodekahedrons */
+    /* Weitere Styling-Eigenschaften für das Dodekahedron */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Hinzufügen eines Schattens */
+    
+    }
+    #container {
+      max-width: 100%;
+      height: 93vh;
+      
+      
+    }
 
   /* Container */
   .container {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
   form {
     display: flex;
@@ -1178,14 +1324,15 @@ label, input {
     
     margin-left: 0;
     margin-right: 0;
-    padding-left: 0.938em;
+    
     padding-right: 0.938em;
   }
 
   
 
   nav ul li:first-child {
-    margin-right: 5;
+    margin-right: 13.5em;
+    
   }
 
   nav ul li:last-child {
@@ -1193,11 +1340,7 @@ label, input {
     
   }
 
-  /* Header */
-  header {
-    margin-top: -4em;
-    padding: 1rem;
-  }
+  
 
   .header-content {
     top: 50%;
@@ -1207,60 +1350,41 @@ label, input {
 
   /* Main */
   main {
-    padding: 2rem;
+    padding: 0;
+    max-width: 80%;
   }
 
   /* Footer */
   footer {
     flex-direction: column;
     font-size: 11px;
-
+    
  
   }
   .impressum {
     flex-wrap: wrap;
-    padding: 1rem;
+    height: 250px;
+    
   }
 
+  #impressum {
+    padding-top: 1em;
+  }
+
+
+  .impressum p:hover {
+    color: #ccc;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 1%;
+    border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
+    }
+    
+    
   /* Überschriften */
-  h1 {
-    font-size: 3.5em;
-  }
 
-  /* Bilder + Text */
-  .image-text-container {
-    flex-direction: column;
-    margin-top: 2rem;
-  }
 
-  .image-text-container img {
-    width: 100%;
-  }
-
-  .image-text-container .text {
-    width: 100%;
-  }
-
-  /* Tabelle */
-  .table-container {
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  /* Slider */
-  .slider-container {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-  }
-
-  .slider-image {
-    width: 100%;
-  }
-
-  .arrow-buttons {
-    top: 0;
-    position: relative;
-    justify-content: center;
-    width: 100%;
-  }
 }
+
+
+
