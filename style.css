@@ -1466,7 +1466,9 @@ label, input {
   /* Navigationsleiste */
 
   
-
+.table-container {
+  margin-left: -1em;
+}
 
   
 
