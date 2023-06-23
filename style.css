@@ -10,7 +10,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   font-family: 'Exo 2', sans-serif;
-
+  overflow-x: hidden;
   
 }
 
@@ -225,7 +225,7 @@ cursor: pointer;
 
 #container {
 max-width: 99.2%;
-
+max-height: 100%;
 height: 88vh;
 display: flex;
 justify-content: center;
@@ -776,7 +776,7 @@ top: 2em;
 position: relative;
 display: flex;
 justify-content:space-evenly;
-width: 100%;
+max-width: 100%;
 
 
 }
@@ -823,6 +823,7 @@ border-radius: 5px;
 border: none;
 cursor: pointer;
 text-align: center;
+max-width: 100%;
 }
 
 .buy-button {
@@ -1153,9 +1154,20 @@ label, input {
 
 @media (max-width: 958px) {
 
+  #nach-links-h2-6 {
+
+  }
+
+
+#nach-links-6 {
+  justify-content: center;
+  font-size: 6em;
+}
+
 
 h2.semibold {
   font-size: 6em;
+  
 }
 p.regular {
   font-size: 2em;
@@ -1186,7 +1198,7 @@ p.regular {
 
   .image-text-container.visible {
     
-    width: 680px;
+    max-width: 100%;
     height: auto;
    
   }
@@ -1197,18 +1209,24 @@ p.regular {
     justify-content: center;
   }
   
-  #unterstes-bild {
-    margin-bottom: 25em;
-  }
-
+#abstand2 {
+  margin-bottom: 5em;
+}
 
  #tabelle-bild {
   margin-top: -25em;
-  padding-top: 8em;
+  padding-top: 20em;
  align-items: center;
  
- max-width: 70%;
+ width: 100%;
+ height: 100%;
  }
+
+ .table-container {
+  
+  max-width: 100%;
+ }
+
 .text {
   width: 100%;
   height: auto;
@@ -1219,7 +1237,7 @@ p.regular {
 
   flex-direction: column;
   margin: 0;
-  max-width: 100%;
+  width: 100%;
   
 
 }
@@ -1238,7 +1256,9 @@ p.regular {
   justify-content: center;
   
 }
-
+#bild {
+  margin-top: 3em;
+} 
 
 .breite h2{
   color: #1FB01C;
@@ -1248,14 +1268,15 @@ p.regular {
   color: white;
 
 }
- 
+
 #zuschnitt-bild #zuschnitte2 {
   height: 1000px;
   
 }
 #zuschnitte2 {
   margin-top: -8em;
-  
+  filter: brightness(0.4); /* Erhöhte Helligkeit */
+
   
 }
 #runterziehen {
@@ -1273,9 +1294,21 @@ p.regular {
   width: 25em;
   
 }
+#runterziehen3 {
+  z-index:9;
+  position: relative;
+}
+#schrift-vorne {
+  z-index:9;
+  position: relative;
+}
+#zuschnitte {
+  filter: brightness(0.4); /* Erhöhte Helligkeit */
+}
 
 #zuschnitte3 {
   margin-top: 2em;
+  filter: brightness(0.4); /* Erhöhte Helligkeit */
 }
 
 .video-container {
@@ -1286,7 +1319,38 @@ p.regular {
   width: 100%;
   margin-top: -5em;
 }
-
+#text1-h1 {
+  font-size: 3em;
+  margin-top: 1em;
+}
+#text1 {
+  width: 195%;
+  font-size: 1.4em;
+}
+#text2-h2 {
+  font-size: 3em;
+  margin-top: 1em;
+}
+#text2 {
+  width: 195%;
+  font-size: 1.4em;
+}
+#text3-h2 {
+  font-size: 3em;
+  margin-top: 1em;
+}
+#text3 {
+  width: 195%;
+  font-size: 1.4em;
+}
+#text4-h2 {
+  font-size: 3em;
+  margin-top: 1em;
+}
+#text4 {
+  width: 195%;
+  font-size: 1.4em;
+}
 }
 
 
@@ -1563,57 +1627,77 @@ p.regular {
 #nach-links-h2 {
   margin-left: -2.2em;
   margin-top: -3em;
+  font-size: 2.7em;
 }
 #nach-links {
   margin-left: -4em;
   margin-bottom: -2em;
+  font-size: 1.5em;
+  
 }
 #nach-links-h2-2 {
-  margin-left: -3.25em;
+  margin-left: -2.4em;
   margin-top: 1em;
+  font-size: 2.7em;
+  width: 5em;
 }
 #nach-links-2 {
-  margin-left: -5.8em;
+  margin-left: -4.3em;
   margin-bottom: -2em;
-  width: 20em;
+  width: 14em;
+  font-size: 1.5em;
+
 }
 #nach-links-h2-3 {
-  margin-left: -2.55em;
+  margin-left: -2.65em;
   margin-top: 2em;
+  font-size: 2.7em;
 }
 #nach-links-3 {
   margin-left: -4.7em;
   margin-bottom: 2em;
+  font-size: 1.5em;
+  width: 14em;
+  
 }
 
 #nach-links-h2-4 {
-  margin-left: 2.4em;
+  margin-left: 1.2em;
   margin-top: -3em;
+  font-size: 2.7em;
 }
 #nach-links-4 {
   
   
-  margin-left: 4.3em;
+  margin-left: 2em;
   margin-bottom: 7em;
+  font-size: 1.5em;
+  width: 14em;
 }
 
 #nach-links-h2-5 {
-  margin-left: 1.5em;
+  margin-left: 1em;
   margin-top:1em;
+  font-size: 2.7em;
+  
 }
 #nach-links-5 {
-  margin-left: 2.5em;
+  margin-left: 1.7em;
   margin-bottom: 2em;
-  width: 20em;
+  width: 14em;
+  font-size: 1.5em;
 }
 #nach-links-h2-6 {
   margin-left: 1.1em;
-  margin-top: 1em;
+  margin-top: -1em;
+  font-size: 2.7em;
+  
 }
 #nach-links-6 {
   margin-left: 2em;
   margin-bottom: 2em;
-  width: 20em;
+  width: 14em;
+  font-size: 1.5em;
 }
 
 h2.semibold {
@@ -1643,32 +1727,40 @@ h2.semibold {
 
 #text1-h1 {
   margin-top: 1em;
+  font-size: 2.7em;
 }
 
 #text1 {
   width: 22em;
+  font-size: 1.2em;
  }
  #text2 {
   width: 22em;
+  font-size: 1.2em;
  }
 
  #text2-h2 {
   margin-top: 1em;
   width: 12em;
+  font-size: 2.7em;
  }
  #text3 {
   width: 22em;
+  font-size: 1.2em;
  }
  #text3-h2 {
   margin-top: 1em;
   width: 10em;
+  font-size: 2.7em;
  }
  #text4-h2 {
   margin-top: 1em;
   width: 10em;
+  font-size: 2.7em;
  }
  #text4 {
   width: 22em;
+  font-size: 1.2em;
  }
 
  form {
@@ -1682,22 +1774,29 @@ h2.semibold {
   margin-top: -1.1em; 
   }
 
- 
+ #rezension {
+  width: 20em;
+ }
 
   label, input {
     max-width: 8em;
     max-height: 1.4em;
   }
 
-  #bild {
-    margin-top: 3em;
-  } 
+  
   .video-container {
     margin-bottom: -4em;
     margin-top: -2em;
   }
   body {
     overflow-x: hidden;
+  }
+  
+  #runterziehen2 {
+    margin-top: 6em;
+  }
+  #runterziehen {
+    margin-top: 13em;
   }
 }
 

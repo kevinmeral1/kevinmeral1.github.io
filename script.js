@@ -48,8 +48,8 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerH
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0xffffff); // Setze den Hintergrund auf Weiß
-renderer.shadowMap.enabled = true; // Aktiviere Schatten
+renderer.setClearColor(0xffffff); // Set the background color to white
+renderer.shadowMap.enabled = true; // Enable shadows
 
 document.getElementById('container').appendChild(renderer.domElement);
 
@@ -65,43 +65,51 @@ const material = new THREE.MeshStandardMaterial({ map: texture });
 
 const dodecahedron = new THREE.Mesh(geometry, material);
 
-// Positionierung des Dodekaeders
-dodecahedron.position.y; // Höhe des Dodekaeders (halbe Kantenlänge)
+// Position the dodecahedron
+dodecahedron.position.y; // Height of the dodecahedron (half of the edge length)
 dodecahedron.rotation.z;
 
- // Rotiere den Dodekaeder um 90 Grad um die x-Achse, sodass eine Fläche auf dem Boden liegt
+// Rotate the dodecahedron 90 degrees around the x-axis so that a face lies on the ground
 
-dodecahedron.castShadow = true; // Objekt wirft Schatten
+dodecahedron.castShadow = true; // Object casts shadows
 scene.add(dodecahedron);
 
-const light = new THREE.DirectionalLight(0xffffff, 10); // Weiße Richtungslichtquelle
+const light = new THREE.DirectionalLight(0xffffff, 10); // White directional light
 light.position.set(10, 10, 10);
-light.castShadow = true; // Lichtquelle wirft Schatten
+light.castShadow = true; // Light casts shadows
 scene.add(light);
 
-const ambientLight = new THREE.AmbientLight(0x404040); // Hintergrundbeleuchtung
-scene.add(ambientLight);        
+const ambientLight = new THREE.AmbientLight(0x404040); // Ambient background light
+scene.add(ambientLight);
 
 const groundSize = 10;
 const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
-  new THREE.ShadowMaterial({ opacity: 0.3 }) // Material für den Boden mit Schatten
+  new THREE.ShadowMaterial({ opacity: 0.3 }) // Material for the ground with shadows
 );
-ground.rotation.x = -Math.PI / 2; // Rotiere den Boden um 90 Grad entlang der x-Achse
+ground.rotation.x = -Math.PI / 2; // Rotate the ground 90 degrees along the x-axis
 ground.receiveShadow = true;
-scene.add(ground);  
+scene.add(ground);
 
 camera.position.z = dodecahedronRadius * 3;
 
 function animate() {
   requestAnimationFrame(animate);
 
-  dodecahedron.rotation.y += 0.01; // Horizontaler Drehwinkel
+  // Check screen size and update scale
+  if (window.innerWidth < 480) {
+    dodecahedron.scale.set(0.8, 0.8, 0.8); // Scale the dodecahedron smaller
+  } else {
+    dodecahedron.scale.set(1, 1, 1); // Reset the scale to its original size
+  }
+
+  dodecahedron.rotation.y += 0.01; // Horizontal rotation angle
 
   renderer.render(scene, camera);
 }
 
 animate();
+
 
 /* Skalierung Dodecaedergröße */
 
