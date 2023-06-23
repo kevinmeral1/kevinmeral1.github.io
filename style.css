@@ -1155,14 +1155,94 @@ label, input {
 @media (max-width: 958px) {
 
   #nach-links-h2-6 {
+    margin-left: 2.1em;
+    margin-top: -3em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+  #nach-links-6 {
+    margin-left: 4.9em;
+    margin-bottom: 2em;
+    width: 14em;
+    font-size: 1.6em;
+  }
 
+  #nach-links-h2 {
+    margin-left: -0.5em;
+    margin-top: 2em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+
+  #nach-links {
+    margin-left: -1em;
+    margin-bottom: -2em;
+    width: 17em;
+    font-size: 1.6em;
+   
+  }
+  #nach-links-h2-4 {
+    margin-left: 2.1em;
+    margin-top: -3em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+  #nach-links-4 {
+    margin-left: 5.2em;
+    margin-bottom: 2em;
+    width: 14em;
+    font-size: 1.6em;
+  }
+  #nach-links-h2-2 {
+    margin-left: -0.5em;
+    margin-top: 2em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+
+  #nach-links-2 {
+    margin-left: -1em;
+    margin-bottom: -2em;
+    width: 17em;
+    font-size: 1.6em;
+   
   }
 
 
-#nach-links-6 {
-  justify-content: center;
-  font-size: 6em;
-}
+  #nach-links-h2-5 {
+    margin-left: 2.1em;
+    margin-top: -3em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+  #nach-links-5 {
+    margin-left: 5.2em;
+    margin-bottom: 2em;
+    width: 14em;
+    font-size: 1.6em;
+  }
+
+  #nach-links-h2-3 {
+    margin-left: -0.5em;
+    margin-top: 2em;
+    font-size: 4em;
+    width: 6em;
+    
+  }
+
+  #nach-links-3 {
+    margin-left: -1em;
+    margin-bottom: 0em;
+    width: 17em;
+    font-size: 1.6em;
+   
+  }
+
 
 
 h2.semibold {
