@@ -1152,6 +1152,15 @@ label, input {
 }
 
 @media (max-width: 958px) {
+
+
+h2.semibold {
+  font-size: 6em;
+}
+p.regular {
+  font-size: 2em;
+}
+
   #bild {
     width: 100%;
   }
@@ -1172,7 +1181,7 @@ label, input {
  }
  main {
     
-  max-width: 70%;
+  max-width: 100%;
 }
 
   .image-text-container.visible {
@@ -1339,22 +1348,6 @@ label, input {
 
 
 
-@media (max-width: 840px) {
-h1 {
-  font-size: 3em;
-}
-#container {
-  max-width: 100%;
-  height: 91vh;
-
-  .slider-image {
-    width: 100%;
-    margin-top: -5em;
-  }
-}
-
-}
-
 
 
 
@@ -1374,9 +1367,16 @@ h1 {
     flex-direction: column;
     max-width: 90%;
   }
+  .main {
+  max-width: 100%;
+ 
+  .table-container {
+    margin: 0;
+    
+  }
 }
 
-
+}
 
 
 
@@ -1423,6 +1423,7 @@ h1 {
   width: 100%;
   margin-top: -5em;
 }
+
 }
 
 
@@ -1485,6 +1486,11 @@ h1 {
       
       
     }
+    main.main {
+      margin: 0;
+    
+      
+    }
 
   /* Container */
   .container {
@@ -1502,7 +1508,8 @@ label, input {
   /* Navigationsleiste */
 
   
-.table-container {
+#tabelle {
+  
   max-width: 100%;
 }
 
@@ -1518,13 +1525,14 @@ label, input {
   main {
     
     max-width: 100%;
+    
   }
 
   /* Footer */
   footer {
     flex-direction: column;
     font-size: 11px;
-    
+    max-width: 100%;
  
   }
   .impressum {
@@ -1671,11 +1679,10 @@ h2.semibold {
   display: flex;
   align-items: center;
   width: 0.1em;
-  margin-top: -1.1em;
- 
-  
-  
+  margin-top: -1.1em; 
   }
+
+ 
 
   label, input {
     max-width: 8em;
@@ -1689,7 +1696,9 @@ h2.semibold {
     margin-bottom: -4em;
     margin-top: -2em;
   }
-
+  body {
+    overflow-x: hidden;
+  }
 }
 
 
