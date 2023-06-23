@@ -643,7 +643,7 @@ max-width: 100%;
 /* Tabelle*/
 
 .table-container {
-width: 50%;
+max-width: 50%;
 
 }
 
@@ -665,7 +665,11 @@ border-bottom: 1px solid white;
 border-top: 1px solid white;
 border-collapse: collapse;
 
+
 }
+
+
+
 
 .table-image {
 width: 50%;
@@ -1096,13 +1100,14 @@ form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: -1.9em;
+    margin-top: -1.2em;
+    
 }
 
 label, input {
     display: block;
-    margin-bottom: 5px;
     
+    z-index: 2000;
 }
 }
 
@@ -1113,9 +1118,7 @@ label, input {
 
 @media (max-width: 1068px) {
 
-  main {
-    margin: 2.5em;
-  }
+ 
   
 }
 
@@ -1174,9 +1177,9 @@ label, input {
   }
 
   .container{
-    margin: auto;
+    margin: 0;
     
-    align-items: center;
+    justify-content: center;
   }
   
   #unterstes-bild {
@@ -1188,15 +1191,15 @@ label, input {
   margin-top: -25em;
   padding-top: 8em;
  align-items: center;
- margin-right: 13em;
- width: 70%;
  
+ max-width: 70%;
+ }
 .text {
   width: 100%;
   height: auto;
 }
 
- }
+ 
 .image-text-container{
 
   flex-direction: column;
@@ -1206,7 +1209,7 @@ label, input {
 
 }
  #sport-bild {
-  max-width: 400%;
+  max-width: 100%;
   
  }
 
@@ -1282,8 +1285,14 @@ label, input {
   .footer {
     display: flex;
     flex-direction: column;
-    margin-right: -10em;
-    margin-left: -10em;
+    
+  }
+  #footer-links {
+    margin-left: -3em;
+    
+  }
+  #footer-rechts {
+    margin-right: 3em;
   }
   .footer .icons {
     justify-content: center; /* Zentriert die horizontalen Icons im Footer */
@@ -1427,6 +1436,7 @@ h1 {
 @media (max-width: 480px) {
   /* Body */
  
+
   #dodecahedron {
     max-width: 100%;
     max-height: 100%;
@@ -1449,17 +1459,11 @@ h1 {
     max-width: 100%;
     height: auto;
   }
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: -1.9em;
-    margin-right: -1.1em;
-}
+ 
 
 label, input {
     display: block;
-    margin-bottom: 5px;
+   
     
 }
 
@@ -1526,7 +1530,7 @@ p.regular {
 }
 #nach-links-h2-2 {
   margin-left: -4.65em;
-  margin-top: -1em;
+  margin-top: 1em;
 }
 #nach-links-2 {
   margin-left: -8.4em;
@@ -1538,7 +1542,7 @@ p.regular {
 }
 #nach-links-3 {
   margin-left: -7.7em;
-  margin-bottom: -2em;
+  margin-bottom: 2em;
 }
 
 #nach-links-h2-4 {
@@ -1552,14 +1556,33 @@ p.regular {
   margin-bottom: 7em;
 }
 
-
-
-
-
+#nach-links-h2-5 {
+  margin-left: 0.8em;
+  margin-top:1em;
+}
+#nach-links-5 {
+  margin-left: 1.5em;
+  margin-bottom: 2em;
+}
+#nach-links-h2-6 {
+  margin-left: 0.8em;
+  margin-top: 1em;
+}
+#nach-links-6 {
+  margin-left: 1.5em;
+  margin-bottom: 2em;
+}
 
 h2.semibold {
   width: 20em;
   
+}
+.text .semibold {
+  font-size: 2em;
+}
+
+.text .regular {
+  font-size: 1.1em;
 }
 .left-video {
   margin-bottom: -5em;
@@ -1574,30 +1597,56 @@ h2.semibold {
 #bild {
   width: 100%;
 }
+
+#text1-h1 {
+  margin-top: 1em;
+}
+
 #text1 {
   width: 18em;
  }
  #text2 {
   width: 18em;
  }
+
+ #text2-h2 {
+  margin-top: 1em;
+  width: 12em;
+ }
  #text3 {
   width: 18em;
+ }
+ #text3-h2 {
+  margin-top: 1em;
+  width: 10em;
+ }
+ #text4-h2 {
+  margin-top: 1em;
+  width: 10em;
  }
  #text4 {
   width: 18em;
  }
+
  form {
   display: none; /* Initially hide the login field */
   position: absolute;
-  top: 1.5em;
-  right: 10em; /* Adjust the position as per your requirements */
+  
+  right: 17em; /* Adjust the position as per your requirements */
   display: flex;
   align-items: center;
-  width: 1%;
-  height: 1%;
+  width: 0.1em;
+  margin-top: -1.1em;
+ 
   
   
   }
+
+  label, input {
+    max-width: 8em;
+    max-height: 1.4em;
+  }
+
   #bild {
     margin-top: 3em;
   } 
