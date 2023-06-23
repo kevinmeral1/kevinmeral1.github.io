@@ -1118,7 +1118,9 @@ label, input {
 
 @media (max-width: 1068px) {
 
- 
+  .container {
+    max-width: 83%;
+  }
   
 }
 
@@ -1168,6 +1170,10 @@ label, input {
  #text4 {
   width: 18em;
  }
+ main {
+    
+  max-width: 70%;
+}
 
   .image-text-container.visible {
     
@@ -1280,6 +1286,7 @@ label, input {
   .container {
     display: flex;
     flex-direction: column;
+    max-width: 80%;
   }
 
   .footer {
@@ -1347,6 +1354,34 @@ h1 {
 }
 
 }
+
+
+
+
+@media (max-width: 651px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+  }
+}
+
+
+
+@media (max-width: 595px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+  }
+}
+
+
+
+
+
+
+
 
 @media (max-width: 580px) {
   h1 {
@@ -1428,14 +1463,11 @@ h1 {
 
 
 
-
-
-
 /* mobile ansicht */ 
 
 @media (max-width: 480px) {
   /* Body */
- 
+
 
   #dodecahedron {
     max-width: 100%;
@@ -1457,7 +1489,7 @@ h1 {
   /* Container */
   .container {
     max-width: 100%;
-    height: auto;
+    
   }
  
 
@@ -1471,7 +1503,7 @@ label, input {
 
   
 .table-container {
-  margin-left: -1em;
+  max-width: 100%;
 }
 
   
@@ -1485,7 +1517,7 @@ label, input {
   /* Main */
   main {
     
-    max-width: 80%;
+    max-width: 100%;
   }
 
   /* Footer */
@@ -1521,56 +1553,59 @@ p.regular {
   
 }
 #nach-links-h2 {
-  margin-left: -3.3em;
+  margin-left: -2.2em;
   margin-top: -3em;
 }
 #nach-links {
-  margin-left: -6em;
+  margin-left: -4em;
   margin-bottom: -2em;
 }
 #nach-links-h2-2 {
-  margin-left: -4.65em;
+  margin-left: -3.25em;
   margin-top: 1em;
 }
 #nach-links-2 {
-  margin-left: -8.4em;
+  margin-left: -5.8em;
   margin-bottom: -2em;
+  width: 20em;
 }
 #nach-links-h2-3 {
-  margin-left: -4.15em;
+  margin-left: -2.55em;
   margin-top: 2em;
 }
 #nach-links-3 {
-  margin-left: -7.7em;
+  margin-left: -4.7em;
   margin-bottom: 2em;
 }
 
 #nach-links-h2-4 {
-  margin-left: 0.8em;
+  margin-left: 2.4em;
   margin-top: -3em;
 }
 #nach-links-4 {
   
   
-  margin-left: 1.5em;
+  margin-left: 4.3em;
   margin-bottom: 7em;
 }
 
 #nach-links-h2-5 {
-  margin-left: 0.8em;
+  margin-left: 1.5em;
   margin-top:1em;
 }
 #nach-links-5 {
-  margin-left: 1.5em;
+  margin-left: 2.5em;
   margin-bottom: 2em;
+  width: 20em;
 }
 #nach-links-h2-6 {
-  margin-left: 0.8em;
+  margin-left: 1.1em;
   margin-top: 1em;
 }
 #nach-links-6 {
-  margin-left: 1.5em;
+  margin-left: 2em;
   margin-bottom: 2em;
+  width: 20em;
 }
 
 h2.semibold {
@@ -1603,10 +1638,10 @@ h2.semibold {
 }
 
 #text1 {
-  width: 18em;
+  width: 22em;
  }
  #text2 {
-  width: 18em;
+  width: 22em;
  }
 
  #text2-h2 {
@@ -1614,7 +1649,7 @@ h2.semibold {
   width: 12em;
  }
  #text3 {
-  width: 18em;
+  width: 22em;
  }
  #text3-h2 {
   margin-top: 1em;
@@ -1625,7 +1660,7 @@ h2.semibold {
   width: 10em;
  }
  #text4 {
-  width: 18em;
+  width: 22em;
  }
 
  form {
