@@ -3,7 +3,7 @@
 body {
   background-color: black;
   color: white;
-  max-width: 100%; /* Hier können Sie die maximale Breite anpassen */
+  max-width: 100%; 
   margin: 0;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ body {
 
 .container {
 
-max-width: 85%; /* Ändere die maximale Breite auf 1200px oder eine andere gewünschte Größe */
+max-width: 85%; 
 margin: 0 auto;
 display: flex;
 justify-content: center;
@@ -71,7 +71,7 @@ nav {
   /* Kanten und Schatten */
 
   border-radius: 7px;
-  overflow: hidden; /* Versteckt den Inhalt, der über die Höhe hinausgeht */
+  overflow: hidden; 
   transition: max-height 0.5s ease;
 }
 
@@ -92,7 +92,7 @@ nav ul li:first-child {
   margin-top: -0.05em;
 }
 nav ul li:last-child {
-  margin-right: 20px; /* Passe den gewünschten Abstand an */
+  margin-right: 20px;
   
 }
 
@@ -139,10 +139,10 @@ margin-bottom: 2em;
 
 
 form {
-display: none; /* Initially hide the login field */
+display: none; 
 position: absolute;
 top: 1.5em;
-right: 10em; /* Adjust the position as per your requirements */
+right: 10em; 
 display: flex;
 align-items: center;
 
@@ -193,10 +193,10 @@ flex-wrap: wrap;
 #dodecahedron {
 width: 500px;
 height: 500px;
-flex: 1; /* Nimmt die volle Breite */
-background-color: #ccc; /* Standardfarbe des Dodekahedrons */
-/* Weitere Styling-Eigenschaften für das Dodekahedron */
-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Hinzufügen eines Schattens */
+flex: 1;
+background-color: #ccc; 
+
+box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); 
 
 
 }
@@ -300,7 +300,7 @@ footer {
 .horizontal-icons {
   display: flex;
   justify-content: space-between;
-  width: 500px; /* Passe die Breite an deine Bedürfnisse an */
+  width: 500px; 
 }
 
 .icon {
@@ -310,7 +310,7 @@ footer {
   background-size: cover;
   background-position: center;
   padding-right: 10em;
-  vertical-align: top; /* Icons vertikal zentrieren */
+  vertical-align: top; 
 }
 
 .footer ul {
@@ -357,19 +357,19 @@ footer {
 .footer a:hover,
 
 .icon img:hover {
-color: #ccc; /* Set the hover color to a darker shade */
-cursor: pointer; /* Set the cursor style to pointer */
-margin-top: 5px; /* Add a margin of 5 pixels at the top */
-border-bottom: 2px solid #037CC2; /* Add a blue bottom border */
+color: #ccc; 
+cursor: pointer; 
+margin-top: 5px; 
+border-bottom: 2px solid #037CC2; 
 
 }
 
 .footer .icon:hover {
-background-color: #ccc; /* Set the background color of the icon to a darker shade */
-cursor: pointer; /* Set the cursor style to pointer */
-border-bottom: 2px solid #037CC2; /* Add a blue bottom border */
-margin-top: 5px; /* Add a margin of 5 pixels at the top */
-padding-bottom: 0; /* Remove any padding at the bottom */
+background-color: #ccc; 
+cursor: pointer; 
+border-bottom: 2px solid #037CC2; 
+margin-top: 5px; 
+padding-bottom: 0; 
 }
 
 .impressum p:hover {
@@ -377,7 +377,7 @@ color: #ccc;
 cursor: pointer;
 margin-top: 9px;
 border-radius: 1%;
-border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
+border-bottom: 0.5px solid #037CC2; 
 }
 
 
@@ -416,8 +416,8 @@ border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
 h1 {
 font-size: 4.5em;
 color: black;
-text-align: center; /* Text zentrieren */
-margin: 0 auto; /* Automatischer äußerer Abstand (links und rechts) */
+text-align: center; 
+margin: 0 auto; 
 }
 
 
@@ -449,8 +449,8 @@ p {
   
 }
 .regular {
-  font-weight: normal; /* Normale Schrift (regular) */
-  font-size: 1.5em; /* Schriftgröße von 1.875em */
+  font-weight: normal; 
+  font-size: 1.5em; 
   
 
 }
@@ -460,7 +460,7 @@ p {
 }
 
 .semibold {
-  font-weight: 600; /* Halbfette Schrift (semibold) */
+  font-weight: 600; 
   margin: 0;
 }
 
@@ -493,15 +493,15 @@ p {
 
 .color-dots {
   display: flex;
-  gap: 10px; /* Passe den Abstand zwischen den Farbdots an */
+  gap: 10px; 
   
 }
 
 .color-dot {
-  width: 20px; /* Passe die Größe der Farbdots an */
-  height: 20px; /* Passe die Größe der Farbdots an */
+  width: 20px; 
+  height: 20px; 
   border-radius: 50%;
-  /* Weitere Styling-Eigenschaften für die Farbdots */
+  
 }
 
 
@@ -537,7 +537,7 @@ p {
 
 .video-container {
 position: relative;
-padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+padding-bottom: 56.25%; 
 height: auto;
 overflow: hidden;
 max-width: 100%;
@@ -681,7 +681,7 @@ transition: opacity 1s ease-in-out;
 }
 
 .hidden {
-opacity: 0; /* Setze die Anfangsopazität auf 0 */
+opacity: 0; 
 }
 
 
@@ -810,14 +810,14 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 display: flex;
 justify-content: center;
-flex-direction: column; /* Buttons untereinander anordnen */
+flex-direction: column; 
 align-items: center;
 }
 
 .buy-button,
 .compare-button {
 margin-top: 8px;
-width: 8em; /* Breite der Buttons */
+width: 8em; 
 height: 2em;
 border-radius: 5px;
 border: none;
@@ -832,7 +832,7 @@ margin-top: 1em;
 background-color: #1FB01C;
 color: white;
 font-size: 2.25em;
-font-weight: 600; /* Semibold */
+font-weight: 600; 
 font-family: 'Exo 2', sans-serif;
 
 
@@ -848,34 +848,34 @@ font-weight:lighter;
 
 
 .arrow-buttons button:hover {
-cursor: pointer; /* Set the cursor style to pointer */
-filter: brightness(85%); /* Apply a brightness filter to make it slightly darker */
+cursor: pointer; 
+filter: brightness(85%); 
 }
 
 .buy-button {
-/* Previous CSS properties */
+
 
 background: linear-gradient(to right, #1FB01C 0%, #1FB01C 50%, white 50%);
 background-size: 200% 100%;
-transition: background-position 0.3s, color 0.3s; /* Add color transition */
+transition: background-position 0.3s, color 0.3s; 
 }
 
 .buy-button:hover {
 background-position: -100% 0;
-color: #1FB01C; /* Set text color to green when hovered */
+color: #1FB01C; 
 }
 
 .compare-button {
-/* Previous CSS properties */
+
 
 background: linear-gradient(to right, #037CC2 0%, #037CC2 50%, white 50%);
 background-size: 200% 100%;
-transition: background-position 0.3s, color 0.3s; /* Add color transition */
+transition: background-position 0.3s, color 0.3s; 
 }
 
 .compare-button:hover {
 background-position: -100% 0;
-color: #037CC2; /* Set text color to green when hovered */
+color: #037CC2; 
 }
 
 
@@ -901,19 +901,19 @@ footer {
 }
 
 .horizontal-icons .icon {
-  margin-bottom: 70px; /* Fügt einen Abstand zwischen den vertikalen Icons hinzu */
+  margin-bottom: 70px;
 }
 .footer {
-  padding: 0; /* Setzt den äußeren Abstand des Footers auf 0 */
+  padding: 0; 
 }
 
 .footer .icons {
-  justify-content: center; /* Zentriert die horizontalen Icons im Footer */
+  justify-content: center; 
 }
 
 .impressum {
-  text-align: center; /* Zentriert den Text im Footer */
-  margin-top: 1em; /* Fügt einen kleinen Abstand oben hinzu */
+  text-align: center; 
+  margin-top: 1em; 
 }
 }
 
@@ -1358,19 +1358,19 @@ p.regular {
 }
 #zuschnitte2 {
   margin-top: -8em;
-  filter: brightness(0.4); /* Erhöhte Helligkeit */
+  filter: brightness(0.4); 
 
   
 }
 #runterziehen {
-  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  z-index:9; 
   position: relative;
   margin-bottom: -40em;
   margin-top: 13em;
   
 }
 #runterziehen2 {
-  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  z-index:9; 
   position: relative;
   margin-bottom: -40em;
   margin-top: 8em;
@@ -1386,12 +1386,12 @@ p.regular {
   position: relative;
 }
 #zuschnitte {
-  filter: brightness(0.4); /* Erhöhte Helligkeit */
+  filter: brightness(0.4); 
 }
 
 #zuschnitte3 {
   margin-top: 2em;
-  filter: brightness(0.4); /* Erhöhte Helligkeit */
+  filter: brightness(0.4); 
 }
 
 .video-container {
@@ -1458,7 +1458,7 @@ p.regular {
     margin-right: 3em;
   }
   .footer .icons {
-    justify-content: center; /* Zentriert die horizontalen Icons im Footer */
+    justify-content: center; 
   }
   .horizontal-icons {
     flex-direction:row;
@@ -1484,10 +1484,10 @@ p.regular {
   }
   #logoLink img {
     object-fit: cover;
-    object-position:0%; /* Passe die gewünschte Position an */
+    object-position:0%; 
 
-    width: 70px; /* Passe die gewünschte Breite an */
-    height: 70px; /* Passe die gewünschte Höhe an */
+    width: 70px; 
+    height: 70px; 
   }
 }
 
@@ -1601,7 +1601,7 @@ p.regular {
   width: 20em;
 }
 #runterziehen2 {
-  z-index:9; /* Eine hohe Zahlenwert, um sicherzustellen, dass der Text vor anderen Elementen angezeigt wird */
+  z-index:9;  
   position: relative;
   margin-bottom: -40em;
   margin-top: 4em;
@@ -1671,10 +1671,10 @@ p.regular {
   #dodecahedron {
     max-width: 100%;
     max-height: 100%;
-    flex: 1; /* Nimmt die volle Breite */
-    background-color: #ccc; /* Standardfarbe des Dodekahedrons */
-    /* Weitere Styling-Eigenschaften für das Dodekahedron */
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Hinzufügen eines Schattens */
+    flex: 1; 
+    background-color: #ccc; 
+    
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); 
     
     }
     #container {
@@ -1749,7 +1749,7 @@ label, input {
     cursor: pointer;
     margin-top: 5px;
     border-radius: 1%;
-    border-bottom: 0.5px solid #037CC2; /* Ändere die Breite der Linie auf 1px */
+    border-bottom: 0.5px solid #037CC2; 
     }
     
     
@@ -1898,10 +1898,10 @@ h2.semibold {
  }
 
  form {
-  display: none; /* Initially hide the login field */
+  display: none; 
   position: absolute;
   
-  right: 17em; /* Adjust the position as per your requirements */
+  right: 17em; 
   display: flex;
   align-items: center;
   width: 0.1em;
