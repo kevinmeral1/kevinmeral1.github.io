@@ -6,7 +6,7 @@
     <title>Color Music</title>
     <style>
         body {
-            background: linear-gradient(to bottom, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); /* Farbiger Verlauf */
+            background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); /* Farbiger Verlauf in verschiedene Richtungen */
             font-family: Arial, sans-serif; /* Standardschriftart festlegen */
             text-align: center; /* Text zentrieren */
             margin: 0; /* Außenabstand entfernen */
@@ -17,7 +17,7 @@
             justify-content: center; /* Zentrierung der Inhalte vertikal */
         }
         h1 {
-            margin: 70px 0; /* Außenabstand oben und unten anpassen */
+            margin: 20px 0; /* Außenabstand oben und unten anpassen */
             font-size: 72px; /* Schriftgröße anpassen */
             color: white; /* Schriftfarbe festlegen */
         }
@@ -25,8 +25,9 @@
             width: 80%; /* Breite auf 80% der Bildschirmbreite setzen */
             max-width: 800px; /* Maximale Breite des Video-Containers */
             margin: auto; /* Zentrierung */
-            margin-top: -50px; /* Video nach oben verschieben */
+            margin-top: -30px; /* Video nach oben verschieben */
             border-radius: 10px; /* Runde Ecken */
+            position: relative; /* Positionierung relativ zum Container */
         }
         #video {
             width: 100%;
@@ -53,7 +54,8 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease; /* Übergangseffekt hinzufügen */
-            margin: 10px; /* Abstand zwischen den Buttons */
+            margin: 10px auto; /* Abstand zwischen den Buttons und Zentrierung horizontal */
+            margin-top: -20px; /* Buttons nach oben verschieben */
         }
         button:hover {
             background-color: #45a049; /* Hintergrundfarbe ändern bei Hover */
@@ -63,7 +65,7 @@
 <body>
     <h1>Color Music</h1>
     <div id="video-container">
-        <video id="video" autoplay></video>
+        <video id="video" autoplay playsinline></video>
         <div id="crosshair"></div>
     </div>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
