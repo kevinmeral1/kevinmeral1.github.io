@@ -1,381 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="icon" type="image/x-icon" href="Logo_Head.png">
-
-  <script src="https://threejs.org/build/three.js"></script>
-  <script src="https://unpkg.com/scrollreveal"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-  <script src="https://threejs.org/examples/js/loaders/GLTFLoader.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> 
-  <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
-  ></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Music</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); /* Farbiger Verlauf */
+            font-family: Arial, sans-serif; /* Standardschriftart festlegen */
+            text-align: center; /* Text zentrieren */
+            margin: 0; /* Außenabstand entfernen */
+            padding: 0; /* Innenabstand entfernen */
+            min-height: 100vh; /* Mindesthöhe des Body auf die gesamte Bildschirmhöhe setzen */
+            display: flex; /* Flexbox-Layout verwenden */
+            flex-direction: column; /* Anordnung der Elemente in einer Spalte */
+            justify-content: center; /* Zentrierung der Inhalte vertikal */
+        }
+        h1 {
+            margin: 70px 0; /* Außenabstand oben und unten anpassen */
+            font-size: 72px; /* Schriftgröße anpassen */
+            color: white; /* Schriftfarbe festlegen */
+        }
+        #video-container {
+            width: 80%; /* Breite auf 80% der Bildschirmbreite setzen */
+            max-width: 800px; /* Maximale Breite des Video-Containers */
+            margin: auto; /* Zentrierung */
+            margin-top: -50px; /* Video nach oben verschieben */
+            border-radius: 10px; /* Runde Ecken */
+        }
+        #video {
+            width: 100%;
+            border-radius: 10px; /* Runde Ecken */
+        }
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid red;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%; /* Kreisförmiges Fadenkreuz */
+        }
+        button {
+            padding: 15px 30px; /* Padding anpassen */
+            font-size: 18px; /* Schriftgröße anpassen */
+            background-color: #4CAF50; /* Hintergrundfarbe setzen */
+            color: white; /* Schriftfarbe setzen */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Übergangseffekt hinzufügen */
+            margin: 10px; /* Abstand zwischen den Buttons */
+        }
+        button:hover {
+            background-color: #45a049; /* Hintergrundfarbe ändern bei Hover */
+        }
+    </style>
 </head>
-<body onload="playAnimations()">
-  
- 
-
-  <header>
-    <nav>
-      <!-- Navigationsleiste -->
-      <ul>
-        <li><a href="#" id="logoLink"><img src="Logo.png" alt="logo"></a></li>
-        <li><a href="#" id="leftIconLink"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="leftIcon" class="svg-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg></a></li>
-            
-        <li><a href="#" id="rightIconLink"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="rightIcon" class="svg-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg></a></li>
-      </ul>
-    
-      <!-- öffnende Navigationsleiste -->
-      <ul class="nav-list">
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Unternehmen</a></li>
-      </ul>
-    
-      <!-- Anmeldefeld -->
-      <form>
-        <label for="username"></label>
-        <input type="text" id="username" name="username" placeholder="Benutzername">
-        
-        <label for="password"></label>
-        <input type="password" id="password" name="password" placeholder="Passwort">
-        
-        <input type="submit" value="Anmelden">
-    </form>
-    </nav>
-    
-    <!-- Header-Bereich -->
-
-   
-
-    <div id="container">
-
-      <div id="dodecahedron"></div>
-
+<body>
+    <h1>Color Music</h1>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+        <div id="crosshair"></div>
     </div>
-<div id="h1-button">
-    <h1 id="headline">Perfektion in jedem Ton</h1>
-      <div id="buttons">
-        <button id="button1" style="background-color: black;"></button>
-        <button id="button2" style="background-color: #999999;"></button>
-        <button id="button3" style="background-color: #1FB01C;"></button>
-        <button id="button4" style="background-color: #037CC2;"></button>
-      </div>
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+    <div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
     </div>
-
-
-  </header>
-  
-  <div class="container">
-    <main class="main">
-      <div id="main-content" class="main-content">
-        
-        <!-- Hauptinhalt -->
-      <div class="image-text-container">
-        <video id="bild" class="left-video" src="IMG_1914.mp4" autoplay loop></video>
-        <div class="text">
-        <h2 id="nach-links-h2-6"class="semibold" >360°-Klang</h2>
-        <p id="nach-links-6"class="regular">Durch die besondere dodekaederförmige Struktur des Lautsprechers könnte er in der Lage sein, den Klang in alle Richtungen gleichmäßig zu verteilen.</p>
-        </div>
-      </div>
-
-
-      <div class="image-text-container">
-        <div id="design" class="text" style="margin-left:10em;">
-        <h2 id="nach-links-h2" class="semibold">Design</h2>
-        <p id="nach-links" class="regular">Ein Auge auf Ästhetik ist unser Grundgedanke, bei der Gestaltung unseres Dodecahedrons</p>
-        </div>
-        <video id="bild" src="IMG_1921.mp4" autoplay loop></video>
-      </div>
-
-      <div class="image-text-container">
-        <video id="bild" src="IMG_1922.mp4" autoplay loop></video>
-        <div class="text">
-        <h2 id="nach-links-h2-4"class="semibold" >Akkubetrieb</h2>
-        <p id="nach-links-4"class="regular">Unser Team von Experten hat es geschafft eine Akkulaufzeit von satten 196h zu erreichen.</p>
-        </div>
-      </div>
-
-      <div class="image-text-container">
-        <div id="beschallung" class="text" style="margin-left:10em; margin-top: -5em;">
-        <h2 id="nach-links-h2-2"class="semibold">Einseitige Beschallung</h2>
-        <p id="nach-links-2" class="regular">Das Eintauchen in die Welt der Musik und des Films lässt sich durch das realistische Klangerlebnis und der gezielten Ausrichtung des Schalls einfacher fallen .</p>
-        </div>
-        <video id="bild" src="IMG_1937.mp4" autoplay loop></video>
-      </div>
-
-      <div class="image-text-container">
-        <video id="bild" class="left-video" src="IMG_1938.mp4" autoplay loop></video>
-        <div class="text">
-        <h2 id="nach-links-h2-5"class="semibold" >Stereo-Mikrofon</h2>
-        <p id="nach-links-5"class="regular">Die 12 Flächen unseres Dodechedrons ermöglichen es, die Umgebungsgeräusche von jeglichem Winkelgrad aufzunehmen.</p>
-        </div>
-      </div>
-
-      <div class="image-text-container">
-        <div id="noise-cancel" class="text" style="padding-left:10em; margin-top: -6em;">
-        <h2 id="nach-links-h2-3" id="noise-h2" class="semibold">Noise-Cancelling</h2>
-        <p id="nach-links-3" class="regular">Da eine symmetrische Anzahl von Flächen gewährleistet ist, kann der Schall im Raum oder vom Lautsprecher selbst ausgelöscht werden.</p>
-        </div>
-        <video id="bild" src="IMG_1936.mp4" autoplay loop></video>
-      </div>
-        
-    </div>
-
-
-
-
-
-      
-      
-<!-- Video -->
-
-    <div class="video-container">
-      <video src="Dodeca_Video_Musik.mp4" controls></video>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-<!-- Bilder + Texte-->
-
-<div class="image-text-container">
-  <img id="bild" src="Dodecahedron_sport.jpg" alt="Bild">
-  <div class="text">
-    
-    <h2 id="text1-h1">Persönlicher Fitnesstrainer</h2>
-    <p id="text1">Nehm doch unseren Dodecaheisser mit zum Training und lass dich von deinen Lieblingssongs motivieren deine Bestleistung zu übertreffen. Egal ist dabei, ob dieser  voller Schweiß, Wasser oder Hitze ausgesetzt ist. Dank seiner Carbonhülle hält dieser härteren Außeneinwirkungen stand.</p>
-  </div>
-</div>
-
-<div class="image-text-container from-right">
-  <div class="text">
-    <h2 id="text2-h2">Außergwöhnliches Ambiente</h2>
-    <p id="text2">Durch seinen perfekten Klang, kann jede Umgebung einen passendes Gefühl gegeben werden. Dies gelingt, indem der komplette Raum beschallt wird.</p>
-  </div>
-  <img id="bild" src="Dodecahedron_Party.jpg" alt="Bild">
-</div>
-<div id="abstand3"></div>
-<div class="image-text-container">
-  <img id="bild" src="Dodecahedron_wandern.jpg" alt="Bild">
-  <div class="text">
-    <h2 id="text3-h2">Unvergessliche Momente</h2>
-    <p id="text3">Auch bei längeren Ausflügen macht der Dodecaheiser nicht schlapp, da seine Akku
-      -Ionen wochenlang funktionstüchtig sind. Weiteres ist sein unauffäliges Erscheinungsbild, welches einzigartige und authentische Momente entstehen lassen. </p>
-  </div>
-</div>
-
-<div class="image-text-container from-right">
-  <div class="text">
-    <h2 id="text4-h2">Erfoglshohe Leistungssteigerung</h2>
-    <p id="text4">Dank Noise-Cancelling kann jedes Meeting in Ruhe stattfinden, auch dann wenn sich jemand einen Kaffee zubereitet. Durch seine Stereo-Mikrofonie kann der Dodecaheiser perfekt jeden Konferenzteilnehmer aufnehmen.</p>
-  </div>
-  <img id="bild" id="unterstes-bild" src="Dodecahedron_zuhause.jpg" alt="Bild">
-</div>
-
-
-
-<div id="abstand2"></div>
-
-
-
-
-
-
-<img id="tabelle-bild" src="Dodecahedron_tabelle_2 (1).png" alt="Bildbeschreibung" class="table-image hidden">
-<h2 class="regular-font" id="technische-daten">Technische Daten</h2>
-<div class="table-container">
-  <!-- Tabelle -->
-
-  <table id="tabelle">
-    <tr id="obere-linie">
-      <td>Größe</td>
-      <td id="sizeVariable">0m</td>
-    </tr>
-    <tr>
-      <td>Flächen</td>
-      <td id="areaVariable">0m<sup>2</sup></td>
-    </tr>
-    <tr>
-      <td>Schalleistung</td>
-      <td id="soundPowerVariable">0dB</td>
-    </tr>
-    <tr>
-      <td>Frequenzbereich</td>
-      <td id="frequencyRangeVariable">0Hz</td>
-    </tr>
-    <tr>
-      <td>Mikrofoncharakteristik</td>
-      <td id="micCharVariable">kugelförmig</td>
-    </tr>
-    <tr>
-      <td>Bluetooth-Ausgangsleistung</td>
-      <td id="bluetoothPowerVariable">0W</td>
-    </tr>
-    <!-- Weitere Konstanten und Variablen -->
-  </table>
-</div>
-
-<div class="abstand"></div>
-
-
-<!-- Kundenrenzensionen-->
-
-<div class="image-text-container">
-  <div id="zuschnitt-bild">
-  <img id="zuschnitte" src="pexels-cottonbro-studio-5053732.jpg" alt="Bild">
-</div>
-  <div class="text">
-    <div id="schrift-vorne" class="breite">
-    <h2>Benjamin Chen</h2>
-    <p id="beruf">Student</p>
-    <p id="rezension">„Als Student bin ich begeistert, dass ich mir den Dodecaheiser Lautsprecher leisten kann, ohne Kompromisse bei der Qualität einzugehen."</p>
-  </div>
-  </div>
-</div>
-
-<div class="image-text-container from-right2">
-  <div class="text">
-    <div id="runterziehen" class="breite">
-    <h2>Mike Rodriguez</h2>
-    <p id="beruf">Produzent</p>
-    <p id="rezension">
-      „Als Musikproduzent bin ich von dem Lautsprecher absolut begeistert - Dieser Lautsprecher stellt selbst die besten Subwoofer in den Schatten - seine satten Bässe verleihen meinen Produktionen eine unglaubliche Tiefe und lassen die Musik lebendig werden."</p>
-    </div>
-    </div>
-  <div id="zuschnitt-bild">
-  <img id="zuschnitte2" src="pexels-anna-pou-8133014.jpg" alt="Bild">
-  </div>
-</div>
-
-<div class="image-text-container">
-  <div id="zuschnitt-bild">
-  <img id="zuschnitte3" src="pexels-tima-miroshnichenko-4988134.jpg" alt="Bild">
-</div>
-  <div class="text">
-    <div id="runterziehen3"class="breite">
-    <h2>Ethan Johnson</h2>
-    <p id="beruf">Soundingenieur</p>
-    <p id="rezension">„Als erfahrener Soundingenieur kann ich mit Sicherheit sagen, dass der Dodecaheiser meine Erwartungen vollkommen übertroffen hat. Die innovative Klangtechnik dieses Geräts erzeugt eine unglaublich Präzison und Immersion." </p>
-  </div>
-  </div>
-</div>
-
-<div class="image-text-container from-right2">
-  <div class="text">
-    <div id="runterziehen2"class="breite">
-    <h2>Sisters in Conversation</h2>
-    <p id="beruf">Podcasterinnen</p>
-    <p id="rezension">„Wir beide können nur gutes sagen. Vorallem beeindruckend ist das Mikrofon, die jeden Ton und jeden Satz unseres Podcast mit sehr hoher Qualität wiedergibt."</p>
-  </div>
-  </div>
-  <div id="zuschnitt-bild">
-  <img id="zuschnitte3" src="pexels-george-milton-6953817.jpg" alt="Bild">
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Slider -->
-    <div class="slider">
-    <div class="slider-container">
-      <div class="slider-image">
-        <img src="grün.png" alt="Bild 1">
-        <div class="button-container">
-          <button class="buy-button">Jetzt Kaufen</button>
-          <button class="compare-button">Vergleichen</button>
-        </div>
-      </div>
-      <div class="slider-image">
-        <img src="schwarz.png" alt="Bild 2">
-        <div class="button-container">
-          <button class="buy-button">Jetzt Kaufen</button>
-          <button class="compare-button">Vergleichen</button>
-        </div>
-      </div>
-      <div class="slider-image">
-        <img src="Blau.png" alt="Bild 3">
-        <div class="button-container">
-          <button class="buy-button">Jetzt Kaufen</button>
-          <button class="compare-button">Vergleichen</button>
-        </div>
-      </div>
-    </div>
-    <div class="arrow-buttons">
-      <button class="left-arrow"></button>
-      <button class="right-arrow"></button>
-    </div>
-  </div>
-  
-
-    
-
-
-
-
-
-  </main>
-  
-  
-  
-  
-  
-  
-
-</div>
-
-  <footer>
-    <!-- Footer-Bereich -->
-    <div class="footer">
-      <!-- Navigationsleiste -->
-      <ul>
-        <li><a id="footer-links">Shop</a><a id="footer-rechts">Unternehmen</a></li>
-        <li><a id="footer-links">Übersicht</a><a id="footer-rechts">Standorte</a></li>
-        <li><a id="footer-links">Angebote</a><a id="footer-rechts">Über uns</a></li>
-        <li><a id="footer-links">Zubehör</a><a id="footer-rechts">Partner</a></li>
-        <li><a id="footer-links">Service</a><a id="footer-rechts">News</a></li>
-      </ul>
-    </div>
-  
-    <div class="icons">
-      <div class="horizontal-icons">
-        <div class="icon"><img src="facebook_icon.png" alt=""></div>
-        <div class="icon"><img src="instagram_icon.png" alt=""></div>
-        <div class="icon"><img src="Linked_icon.png" alt=""></div>
-      </div>
-    </div>
-  
-    <div class="impressum">
-      <p id="impressum">Impressum</p>
-      <p>Kontakt</p>
-      <p id="datenschutz">Datenschutz</p>
-    </div>
-  </footer>
-  
-  <script src="script.js"></script>
- 
-
+    <script src="https://cdn.jsdelivr.net/npm/tone@latest/build/Tone.min.js"></script>
+    <script src="main.js"></script>
 </body>
-
 </html>
