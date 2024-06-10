@@ -6,7 +6,6 @@ let colorData;
 let synth = new Tone.Synth().toDestination();
 let isRunning = false;
 
-// Funktion zur Kameraaktivierung
 async function startCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -16,7 +15,6 @@ async function startCamera() {
     }
 }
 
-// Funktion zur Farberkennung und Tonerzeugung
 function analyzeColor() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     let imageData = ctx.getImageData(canvas.width / 2, canvas.height / 2, 1, 1);
@@ -25,7 +23,6 @@ function analyzeColor() {
     synth.triggerAttackRelease(avgColor, "8n");
 }
 
-// Start-Button-Event
 document.getElementById('start').addEventListener('click', () => {
     if (!isRunning) {
         interval = setInterval(analyzeColor, 500);
@@ -33,11 +30,9 @@ document.getElementById('start').addEventListener('click', () => {
     }
 });
 
-// Stop-Button-Event
 document.getElementById('stop').addEventListener('click', () => {
     clearInterval(interval);
     isRunning = false;
 });
 
-// Kamera beim Laden der Seite starten
 window.onload = startCamera;

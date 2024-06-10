@@ -6,32 +6,31 @@
     <title>Color Music</title>
     <style>
         body {
-            background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); /* Farbiger Verlauf in verschiedene Richtungen */
-            font-family: Arial, sans-serif; /* Standardschriftart festlegen */
-            text-align: center; /* Text zentrieren */
-            margin: 0; /* Außenabstand entfernen */
-            padding: 0; /* Innenabstand entfernen */
-            min-height: 100vh; /* Mindesthöhe des Body auf die gesamte Bildschirmhöhe setzen */
-            display: flex; /* Flexbox-Layout verwenden */
-            flex-direction: column; /* Anordnung der Elemente in einer Spalte */
-            justify-content: center; /* Zentrierung der Inhalte vertikal */
-        }
+            background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
         h1 {
-            margin: 20px 0; /* Außenabstand oben und unten anpassen */
-            font-size: 72px; /* Schriftgröße anpassen */
-            color: white; /* Schriftfarbe festlegen */
+            margin: 20px 0; 
+            font-size: 72px; 
+            color: white; 
         }
         #video-container {
-            width: 80%; /* Breite auf 80% der Bildschirmbreite setzen */
-            max-width: 800px; /* Maximale Breite des Video-Containers */
-            margin: auto; /* Zentrierung */
-            margin-top: -30px; /* Video nach oben verschieben */
-            border-radius: 10px; /* Runde Ecken */
-            position: relative; /* Positionierung relativ zum Container */
+            width: 80%;
+            max-width: 800px; 
+            margin: auto;
+            margin-top: -30px; 
+            border-radius: 10px; 
+            position: relative; 
         }
         #video {
             width: 100%;
-            border-radius: 10px; /* Runde Ecken */
+            border-radius: 10px; 
         }
         #crosshair {
             position: absolute;
@@ -43,22 +42,21 @@
             border: 2px solid red;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            border-radius: 50%; /* Kreisförmiges Fadenkreuz */
+            border-radius: 50%; 
         }
         button {
-            padding: 15px 30px; /* Padding anpassen */
-            font-size: 18px; /* Schriftgröße anpassen */
-            background-color: #4CAF50; /* Hintergrundfarbe setzen */
-            color: white; /* Schriftfarbe setzen */
+            padding: 15px 30px; 
+            font-size: 18px; 
+            background-color: #4CAF50; 
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease; /* Übergangseffekt hinzufügen */
-            margin: 10px auto; /* Abstand zwischen den Buttons und Zentrierung horizontal */
-            margin-top: -20px; /* Buttons nach oben verschieben */
-        }
+            transition: background-color 0.3s ease; 
+            margin: 10px auto;
+            margin-top: -20px; 
         button:hover {
-            background-color: #45a049; /* Hintergrundfarbe ändern bei Hover */
+            background-color: #45a049; 
         }
     </style>
 </head>
