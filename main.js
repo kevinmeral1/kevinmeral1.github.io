@@ -11,7 +11,11 @@ synth.connect(filter);
 
 async function startCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+                facingMode: { exact: 'environment' }  // Nutze die Rückkamera
+            }
+        });
         video.srcObject = stream;
     } catch (err) {
         console.error("Fehler beim Zugriff auf die Kamera: ", err);
@@ -31,7 +35,6 @@ function analyzeColor() {
     synth.triggerAttackRelease(frequency, "8n");
 }
 
-
 document.getElementById('start').addEventListener('click', () => {
     if (!isRunning) {
         interval = setInterval(analyzeColor, 500);
@@ -39,11 +42,9 @@ document.getElementById('start').addEventListener('click', () => {
     }
 });
 
-
 document.getElementById('stop').addEventListener('click', () => {
     clearInterval(interval);
     isRunning = false;
 });
-
 
 window.onload = startCamera;
