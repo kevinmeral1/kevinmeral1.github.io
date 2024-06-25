@@ -15,7 +15,7 @@ async function startCamera() {
         const constraints = {
             video: {
                 facingMode: {
-                    ideal: document.getElementById('camera-select').value // Verwende 'ideal' statt 'exact'
+                    ideal: document.getElementById('camera-select').value
                 }
             }
         };
@@ -38,6 +38,10 @@ function analyzeColor() {
 
     let frequency = 200 + (colorData[0] + colorData[1] + colorData[2]) / 3;
     synth.triggerAttackRelease(frequency, "8n");
+
+    // Ändere die Rahmenfarbe basierend auf der analysierten Farbe
+    let rgbColor = `rgb(${colorData[0]}, ${colorData[1]}, ${colorData[2]})`;
+    document.getElementById('video').style.borderColor = rgbColor;
 }
 
 document.getElementById('start').addEventListener('click', () => {
