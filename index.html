@@ -29,9 +29,11 @@
             border-radius: 10px; 
             position: relative; 
         }
-        #video {
+        .camera-feed {
             width: 100%;
-            border-radius: 10px; 
+            border: 2px solid #fff; /* Rahmen um das Video */
+            border-radius: 10px; /* Abgerundete Ecken für den Rahmen */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Schatten um das Video */
         }
         #crosshair {
             position: absolute;
@@ -71,7 +73,7 @@
 <body>
     <h1>Color Music</h1>
     <div id="video-container">
-        <video id="video" autoplay playsinline></video>
+        <video id="video" class="camera-feed" autoplay playsinline></video>
         <div id="crosshair"></div>
     </div>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
