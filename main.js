@@ -15,7 +15,7 @@ async function startCamera() {
         const constraints = {
             video: {
                 facingMode: {
-                    exact: document.getElementById('camera-select').value
+                    ideal: document.getElementById('camera-select').value // Verwende 'ideal' statt 'exact'
                 }
             }
         };
