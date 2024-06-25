@@ -6,7 +6,7 @@
     <title>Color Music</title>
     <style>
         body {
-            background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C); /* Farbiger Verlauf in verschiedene Richtungen */
+            background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C);
             font-family: Arial, sans-serif; 
             text-align: center; 
             margin: 0; 
@@ -60,6 +60,12 @@
         button:hover {
             background-color: #45a049; 
         }
+        select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +76,10 @@
     </div>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
     <div>
+        <select id="camera-select">
+            <option value="user">Frontkamera</option>
+            <option value="environment">Rückkamera</option>
+        </select>
         <button id="start">Start</button>
         <button id="stop">Stop</button>
     </div>
