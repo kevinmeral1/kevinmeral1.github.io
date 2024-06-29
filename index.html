@@ -25,7 +25,7 @@
         #video-container {
             width: 60%;
             max-width: 500px;
-            aspect-ratio: 1 / 1; /* Wichtiger Hinweis für das Seitenverhältnis */
+            aspect-ratio: 1 / 1; /* Ensures the container is always square */
             margin: 40px 0;
             border-radius: 50%;
             overflow: hidden;
@@ -36,8 +36,8 @@
         #video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Das Video wird entsprechend dem Container-Bereich skaliert */
-            border-radius: 50%; /* Sicherstellen, dass das Video im Kreis angezeigt wird */
+            object-fit: cover;
+            border-radius: 50%;
         }
         #crosshair {
             position: absolute;
@@ -72,7 +72,7 @@
         @media (max-width: 768px) {
             #video-container {
                 width: 80%;
-                max-width: 400px; /* Reduzierte max-width für kleinere Bildschirme */
+                max-width: 400px;
             }
             h1 {
                 font-size: 48px;
@@ -81,7 +81,7 @@
         @media (max-width: 480px) {
             #video-container {
                 width: 90%;
-                max-width: 300px; /* Noch kleinere max-width für sehr kleine Bildschirme */
+                max-width: 300px;
             }
             h1 {
                 font-size: 36px;
@@ -92,7 +92,7 @@
             }
             button {
                 width: 100%;
-                max-width: 200px; /* Stellen Sie sicher, dass die Schaltflächen nicht zu breit sind */
+                max-width: 200px;
             }
         }
     </style>
