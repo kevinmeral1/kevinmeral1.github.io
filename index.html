@@ -72,7 +72,7 @@
         @media (max-width: 768px) {
             #video-container {
                 width: 80%;
-                max-width: 600px;
+                max-width: 400px; /* Reduzierte max-width für kleinere Bildschirme */
             }
             h1 {
                 font-size: 48px;
@@ -80,11 +80,19 @@
         }
         @media (max-width: 480px) {
             #video-container {
-                width: 100%;
-                max-width: 700px;
+                width: 90%;
+                max-width: 300px; /* Noch kleinere max-width für sehr kleine Bildschirme */
             }
             h1 {
                 font-size: 36px;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            button {
+                width: 100%;
+                max-width: 200px; /* Stellen Sie sicher, dass die Schaltflächen nicht zu breit sind */
             }
         }
     </style>
