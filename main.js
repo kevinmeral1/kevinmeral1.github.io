@@ -84,18 +84,16 @@ function analyzeColor() {
     document.getElementById('video-container').style.borderColor = rgbColor;
 }
 
-document.getElementById('start').addEventListener('click', async () => {
+document.getElementById('start-stop').addEventListener('click', async () => {
     if (!isRunning) {
         await Tone.start();
         interval = setInterval(analyzeColor, 100);
         isRunning = true;
-    }
-});
-
-document.getElementById('stop').addEventListener('click', () => {
-    if (isRunning) {
+        document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
+    } else {
         clearInterval(interval);
         isRunning = false;
+        document.getElementById('start-stop').textContent = 'Start'; // Change button text to Start
     }
 });
 
