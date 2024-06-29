@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C);
@@ -64,6 +65,10 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -109,9 +114,11 @@
     </div>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
     <div class="controls">
-        <button id="camera-switch">Switch Camera</button>
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
+        <button id="camera-switch">
+            <i class="fas fa-camera"></i>
+            <i class="fas fa-sync-alt"></i> <!-- Arrow icon for switching -->
+        </button>
+        <button id="start-stop">Start</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tone@latest/build/Tone.min.js"></script>
     <script src="main.js"></script>
