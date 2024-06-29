@@ -7,33 +7,37 @@
     <style>
         body {
             background: linear-gradient(45deg, #2980B9, #6DD5FA, #F7DC6F, #E74C3C);
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            margin: 0; 
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
             padding: 0;
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         h1 {
-            margin: 20px 0;
-            font-size: 72px; 
-            color: white; 
+            margin: 40px 0;
+            font-size: 72px;
+            color: white;
         }
         #video-container {
-            width: 80%; 
-            max-width: 800px; 
-            margin: auto;
-            margin-top: -30px;
-            border-radius: 10px; 
-            position: relative; 
+            width: 60%;
+            max-width: 500px;
+            aspect-ratio: 1;
+            margin: 40px 0;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            border: 20px solid #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
         }
         #video {
             width: 100%;
-            border: 10px solid #fff; /* Größerer Rahmen um das Video */
-            border-radius: 20px; /* Abgerundete Ecken für den Rahmen */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Schatten um das Video */
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
         #crosshair {
             position: absolute;
@@ -45,28 +49,43 @@
             border: 2px solid red;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            border-radius: 50%; 
+            border-radius: 50%;
         }
         button {
-            padding: 15px 30px; 
-            font-size: 18px; 
-            background-color: #4CAF50; 
-            color: white; 
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease; 
-            margin: 10px auto; 
-            margin-top: -20px;
+            transition: background-color 0.3s ease;
+            margin: 10px 0;
         }
         button:hover {
-            background-color: #45a049; 
+            background-color: #45a049;
         }
-        select {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 10px;
+        .controls {
+            margin: 40px 0;
+        }
+        
+        @media (max-width: 768px) {
+            #video-container {
+                width: 80%;
+                max-width: 600px;
+            }
+            h1 {
+                font-size: 48px;
+            }
+        }
+        @media (max-width: 480px) {
+            #video-container {
+                width: 100%;
+                max-width: 700px;
+            }
+            h1 {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
@@ -77,11 +96,8 @@
         <div id="crosshair"></div>
     </div>
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
-    <div>
-        <select id="camera-select">
-            <option value="user">Frontkamera</option>
-            <option value="environment">Rückkamera</option>
-        </select>
+    <div class="controls">
+        <button id="camera-switch">Switch Camera</button>
         <button id="start">Start</button>
         <button id="stop">Stop</button>
     </div>
