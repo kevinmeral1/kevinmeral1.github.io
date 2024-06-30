@@ -11,15 +11,15 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 0;
+            padding: 20px 0; /* Reduced padding to bring content closer to top and bottom edges */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between; /* Ensure elements are distributed evenly within the viewport */
             align-items: center;
         }
         h1 {
-            margin: 20px 0; /* Reduced margin */
+            margin: 10px 0; /* Reduced margin to bring h1 closer to the top */
             font-size: 80px; /* Slightly increased font size */
             color: white;
         }
@@ -74,7 +74,7 @@
             background-color: #45a049;
         }
         .controls {
-            margin: 20px 0; /* Reduced margin */
+            margin: 20px 0 10px; /* Reduced margin to bring buttons closer to the bottom */
         }
         
         @media (max-width: 768px) {
@@ -84,7 +84,7 @@
             }
             h1 {
                 font-size: 60px; /* Increased font size for medium screens */
-                margin: 20px 0; /* Adjusted margin */
+                margin: 10px 0; /* Adjusted margin */
             }
         }
         @media (max-width: 480px) {
@@ -97,12 +97,12 @@
             }
             h1 {
                 font-size: 50px; /* Increased font size for small screens */
-                margin: 20px 0; /* Adjusted margin */
+                margin: 10px 0; /* Adjusted margin */
             }
             .controls {
                 flex-direction: column;
                 align-items: center;
-                margin: 20px 0; /* Adjusted margin */
+                margin: 10px 0; /* Adjusted margin */
             }
             button {
                 width: 100%;
