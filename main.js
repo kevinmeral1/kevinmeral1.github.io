@@ -29,23 +29,64 @@ let lastLightness = 50;
 
 // Rhythm settings
 const rhythmInterval = 1; // Rhythm interval in seconds
-let rhythmTimer = null;
+let sequence;
 
-async function startCamera() {
-    try {
-        const constraints = {
-            video: {
-                facingMode: {
-                    ideal: cameraFacing
-                }
-            }
-        };
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        video.srcObject = stream;
-        currentStream = stream;
-    } catch (err) {
-        console.error("Fehler beim Zugriff auf die Kamera: ", err);
+// Initialize Tone.js sequence
+function initializeSequence() {
+    let notes = [];
+    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+
+    // Create an empty sequence
+    sequence = new Tone.Sequence((time, note) => {
+        let chord = determineChord(lastHue);
+        let duration = mapLightnessToDuration(lastLightness, chord.length);
+
+        // Stop all previous notes to prevent overlapping
+        synth.triggerRelease();
+
+        // Play the chord with the determined duration
+        chord.forEach((note, index) => {
+            let noteDuration = duration / chord.length;
+            synth.triggerAttack(note, time + index * noteDuration);
+            synth.triggerRelease(time + (index + 1) * noteDuration);
+        });
+    }, scale, rhythmInterval).start(0);
+
+    Tone.Transport.start();
+}
+
+function determineChord(hue) {
+    let chord = [];
+    
+    // Determine the chord based on hue
+    switch (Math.floor(hue / 60) % 6) {
+        case 0:
+            chord = ["C4", "E4", "G4"]; // C Major
+            break;
+        case 1:
+            chord = ["D4", "F#4", "A4"]; // D Major
+            break;
+        case 2:
+            chord = ["E4", "G#4", "B4"]; // E Major
+            break;
+        case 3:
+            chord = ["F4", "A4", "C5"]; // F Major
+            break;
+        case 4:
+            chord = ["G4", "B4", "D5"]; // G Major
+            break;
+        case 5:
+            chord = ["A4", "C#5", "E5"]; // A Major
+            break;
     }
+
+    return chord;
+}
+
+function mapLightnessToDuration(lightness, numNotes) {
+    let minDuration = 0.5; // minimum duration of a note in seconds
+    let maxDuration = 1.5; // maximum duration of a note in seconds
+    return minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration) * numNotes;
 }
 
 function rgbToHsl(r, g, b) {
@@ -119,69 +160,19 @@ function analyzeColor() {
     document.getElementById('video-container').style.borderColor = hslString;
 }
 
-function playRhythmicPattern() {
-    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-    let scaleIndex = Math.floor((lastHue / 360) * scale.length);
-    let chord = [];
-    
-    // Determine the chord based on hue
-    switch (Math.floor(lastHue / 60) % 6) {
-        case 0:
-            chord = ["C4", "E4", "G4"]; // C Major
-            break;
-        case 1:
-            chord = ["D4", "F#4", "A4"]; // D Major
-            break;
-        case 2:
-            chord = ["E4", "G#4", "B4"]; // E Major
-            break;
-        case 3:
-            chord = ["F4", "A4", "C5"]; // F Major
-            break;
-        case 4:
-            chord = ["G4", "B4", "D5"]; // G Major
-            break;
-        case 5:
-            chord = ["A4", "C#5", "E5"]; // A Major
-            break;
-    }
-
-    // Map lightness to volume (0 dB at white to silence at black)
-    let volume = lastLightness > 30 ? -50 + (lastLightness / 100) * 10 : -Infinity; // silence if too dark
-
-    // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 0.5; // minimum duration of a note in seconds
-    let maxDuration = 1.5; // maximum duration of a note in seconds
-    let duration = minDuration + ((100 - lastLightness) / 100) * (maxDuration - minDuration);
-
-    // Apply the mapped values
-    synth.set({ volume: volume });
-    filter.frequency.rampTo((lastLightness / 100) * 1980 + 20, 0.5);
-
-    // Play the chord with a rhythmic pattern
-    chord.forEach((note, index) => {
-        let noteDuration = duration / chord.length;
-        synth.triggerAttack(note, Tone.now() + index * noteDuration);
-        synth.triggerRelease(Tone.now() + (index + 1) * noteDuration);
-    });
-}
-
-function startRhythm() {
-    // Ensure the rhythm continues
-    rhythmTimer = setInterval(playRhythmicPattern, rhythmInterval * 1000);
-}
-
 document.getElementById('start-stop').addEventListener('click', async () => {
     if (!isRunning) {
         await Tone.start();
         interval = setInterval(analyzeColor, 100);
-        startRhythm();
+        initializeSequence();
         isRunning = true;
         document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
     } else {
         clearInterval(interval);
-        clearInterval(rhythmTimer);
-        rhythmTimer = null;
+        if (sequence) {
+            sequence.stop();
+        }
+        Tone.Transport.stop();
         isRunning = false;
         document.getElementById('start-stop').textContent = 'Start'; // Change button text to Start
     }
