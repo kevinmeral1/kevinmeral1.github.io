@@ -16,8 +16,8 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Ensure elements are distributed evenly within the viewport */
-            align-items: center;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
         }
         h1 {
             margin: 10px 0; /* Reduced margin to bring h1 closer to the top */
@@ -89,6 +89,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer; /* Pointer cursor to indicate clickable */
+            position: absolute; /* Position absolutely to center it */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for center alignment */
         }
         #camera-switch .fa-sync-alt {
             font-size: 36px; /* Increase size of the arrow icon */
