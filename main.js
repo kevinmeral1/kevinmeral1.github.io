@@ -6,6 +6,7 @@ let isRunning = false;
 let currentStream;
 let cameraFacing = 'user'; // Initial camera facing mode
 let previousHSL = { h: 0, s: 0, l: 0 }; // Store previous HSL values to maintain rhythm
+let analyzeInterval = 1000; // Start with a 1-second interval
 
 // Create a synthesizer with effects
 let synth = new Tone.PolySynth(Tone.Synth, {
@@ -92,4 +93,102 @@ function analyzeColor() {
     });
 
     let averageColor = {
-        r: totalColor.r / points.length
+        r: totalColor.r / points.length,
+        g: totalColor.g / points.length,
+        b: totalColor.b / points.length,
+    };
+
+    let hslColor = rgbToHsl(averageColor.r, averageColor.g, averageColor.b);
+
+    // Map HSL to musical parameters
+    let hue = hslColor.h; // 0 - 360
+    let saturation = hslColor.s; // 0 - 100
+    let lightness = hslColor.l; // 0 - 100
+
+    // Define a threshold for darkness
+    const darknessThreshold = 20; // below this lightness value is considered too dark
+
+    // Diatonic scale (C major)
+    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+    let scaleIndex = Math.floor((hue / 360) * scale.length);
+    let note = scale[scaleIndex];
+    
+    // Determine the chord based on hue
+    let chord;
+    switch (Math.floor(hue / 60) % 6) {
+        case 0:
+            chord = ["C4", "E4", "G4"]; // C Major
+            break;
+        case 1:
+            chord = ["D4", "F#4", "A4"]; // D Major
+            break;
+        case 2:
+            chord = ["E4", "G#4", "B4"]; // E Major
+            break;
+        case 3:
+            chord = ["F4", "A4", "C5"]; // F Major
+            break;
+        case 4:
+            chord = ["G4", "B4", "D5"]; // G Major
+            break;
+        case 5:
+            chord = ["A4", "C#5", "E5"]; // A Major
+            break;
+    }
+
+    // Map lightness to volume (0 dB at white to silence at black)
+    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
+
+    // Map lightness to note duration (longer notes for darker colors)
+    let minDuration = 1.5; // minimum duration of a note in seconds
+    let maxDuration = 4; // maximum duration of a note in seconds
+    let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
+
+    // Only play note if lightness is above the threshold (not too dark)
+    if (lightness > darknessThreshold) {
+        // Play the chord with a rhythmic pattern
+        synth.triggerAttackRelease(chord, duration);
+    } else {
+        // If too dark, do not play a note but keep the rhythm
+        synth.triggerRelease();
+    }
+
+    // Update previous HSL values only if color has changed
+    if (hslColor.h !== previousHSL.h || hslColor.s !== previousHSL.s || hslColor.l !== previousHSL.l) {
+        previousHSL = hslColor;
+    }
+
+    // Set the border color based on the HSL values
+    let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
+    document.getElementById('video-container').style.borderColor = hslString;
+
+    // Adjust analyze interval based on lightness (brightness)
+    clearInterval(interval); // Clear the previous interval
+    analyzeInterval = 1000 - (lightness * 10); // Example mapping, adjust as needed
+    interval = setInterval(analyzeColor, analyzeInterval); // Set the new interval
+}
+
+document.getElementById('start-stop').addEventListener('click', async () => {
+    if (!isRunning) {
+        await Tone.start();
+        interval = setInterval(analyzeColor, analyzeInterval); // Start with the initial interval
+        isRunning = true;
+        document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
+    } else {
+        clearInterval(interval);
+        isRunning = false;
+        document.getElementById('start-stop').textContent = 'Start'; // Change button text to Start
+    }
+});
+
+document.getElementById('camera-switch').addEventListener('click', () => {
+    if (currentStream) {
+        currentStream.getTracks().forEach(track => {
+            track.stop();
+        });
+    }
+    cameraFacing = cameraFacing === 'user' ? 'environment' : 'user';
+    startCamera();
+});
+
+window.onload = startCamera;
