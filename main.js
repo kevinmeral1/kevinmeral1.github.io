@@ -9,7 +9,7 @@ let cameraFacing = 'user'; // Initial camera facing mode
 // Create a synthesizer with effects
 let synth = new Tone.PolySynth(Tone.Synth, {
     maxPolyphony: 4,
-    volume: -20
+    volume: -10 // Lower volume for quieter output
 }).toDestination();
 
 let filter = new Tone.Filter(1000, "lowpass", -12).toDestination();
@@ -19,23 +19,11 @@ synth.connect(filter);
 filter.connect(reverb);
 reverb.connect(delay);
 
-async function startCamera() {
-    try {
-        const constraints = {
-            video: {
-                facingMode: {
-                    ideal: cameraFacing
-                }
-            }
-        };
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        video.srcObject = stream;
-        currentStream = stream;
-    } catch (err) {
-        console.error("Fehler beim Zugriff auf die Kamera: ", err);
-    }
-}
+let lastNote = null;
+let lastDuration = 0.5;
+let lastColor = { r: 0, g: 0, b: 0 };
 
+// Function to convert RGB to HSL
 function rgbToHsl(r, g, b) {
     r /= 255;
     g /= 255;
@@ -71,6 +59,7 @@ function rgbToHsl(r, g, b) {
     };
 }
 
+// Function to analyze the color and play sounds
 function analyzeColor() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -98,20 +87,16 @@ function analyzeColor() {
 
     let hslColor = rgbToHsl(averageColor.r, averageColor.g, averageColor.b);
 
-    // Map HSL to musical parameters
     let hue = hslColor.h; // 0 - 360
     let saturation = hslColor.s; // 0 - 100
     let lightness = hslColor.l; // 0 - 100
 
-    // Define a threshold for darkness
-    const darknessThreshold = 20; // below this lightness value is considered too dark
+    const darknessThreshold = 20; // Threshold to determine if the color is too dark
 
-    // Diatonic scale (C major)
     let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
     let scaleIndex = Math.floor((hue / 360) * scale.length);
     let note = scale[scaleIndex];
     
-    // Determine the chord based on hue
     let chord;
     switch (Math.floor(hue / 60) % 6) {
         case 0:
@@ -134,25 +119,25 @@ function analyzeColor() {
             break;
     }
 
-    // Map lightness to volume (0 dB at white to silence at black)
-    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
-
-    // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 0.2; // minimum duration of a note in seconds
-    let maxDuration = 1.5; // maximum duration of a note in seconds
+    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity;
+    let minDuration = 0.2;
+    let maxDuration = 1.5;
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Apply the mapped values
-    synth.set({ volume: volume });
-    filter.frequency.rampTo((lightness / 100) * 1980 + 20, 0.5);
-
-    // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
-        // Play the chord with a rhythmic pattern
-        synth.triggerAttackRelease(chord, duration);
+        if (!lastNote || lastColor.r !== averageColor.r || lastColor.g !== averageColor.g || lastColor.b !== averageColor.b) {
+            lastNote = chord;
+            lastDuration = duration;
+        }
+
+        synth.set({ volume: volume });
+        filter.frequency.rampTo((lightness / 100) * 1980 + 20, 0.5);
+
+        synth.triggerAttackRelease(lastNote, lastDuration);
     }
 
-    // Set the border color based on the HSL values
+    lastColor = averageColor;
+
     let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
     document.getElementById('video-container').style.borderColor = hslString;
 }
