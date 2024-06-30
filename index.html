@@ -83,11 +83,15 @@
             background: none; /* Remove background */
             border: none; /* Remove border */
             padding: 10px; /* Adjust padding to fit the icon size */
-            width: auto; /* Adjust width to fit the icon */
+            width: 60px; /* Set a fixed width to ensure the button is wide enough for the icon */
+            height: 60px; /* Set a fixed height to match the width */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer; /* Pointer cursor to indicate clickable */
         }
         #camera-switch .fa-sync-alt {
-            font-size: 24px; /* Increase size of the arrow icon */
+            font-size: 36px; /* Increase size of the arrow icon */
             color: white; /* Set icon color */
         }
         /* Media query for better responsiveness */
@@ -103,8 +107,12 @@
             button {
                 width: 200px; /* Adjust button width for medium screens */
             }
+            #camera-switch {
+                width: 50px; /* Adjust width for medium screens */
+                height: 50px; /* Adjust height for medium screens */
+            }
             #camera-switch .fa-sync-alt {
-                font-size: 20px; /* Adjust icon size for medium screens */
+                font-size: 28px; /* Adjust icon size for medium screens */
             }
         }
         @media (max-width: 480px) {
@@ -128,8 +136,12 @@
                 width: 100%; /* Full width on very small screens */
                 max-width: 200px; /* Max width to ensure buttons don't get too large */
             }
+            #camera-switch {
+                width: 60px; /* Adjust width for small screens */
+                height: 60px; /* Adjust height for small screens */
+            }
             #camera-switch .fa-sync-alt {
-                font-size: 24px; /* Adjust icon size for small screens */
+                font-size: 32px; /* Adjust icon size for small screens */
             }
         }
     </style>
