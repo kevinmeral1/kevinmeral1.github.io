@@ -101,24 +101,27 @@
             width: 100%; /* Ensure wrapper takes full width */
             margin: 10px 0; /* Margin to space it out from other elements */
         }
+        /* Variant buttons */
         .variant-buttons {
             display: flex;
-            justify-content: center;
             gap: 10px;
-            margin-top: 10px;
         }
         .variant-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3498DB;
-            color: white;
+            padding: 10px;
+            width: 60px;
+            height: 60px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
-        .variant-button:hover {
-            background-color: #2980B9;
+        #variant1 {
+            background-color: #FF5733;
+        }
+        #variant2 {
+            background-color: #33FF57;
+        }
+        #variant3 {
+            background-color: #3357FF;
         }
         /* Media query for better responsiveness */
         @media (max-width: 768px) {
@@ -170,13 +173,12 @@
                 font-size: 32px; /* Adjust icon size for small screens */
             }
             .variant-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 5px;
+                flex-direction: row; /* Ensure variant buttons are in a row */
+                gap: 5px; /* Adjust gap for small screens */
             }
             .variant-button {
-                width: 100%;
-                max-width: 100px;
+                width: 50px; /* Adjust size for small screens */
+                height: 50px; /* Adjust size for small screens */
             }
         }
     </style>
@@ -196,9 +198,9 @@
         </div>
         <button id="start-stop">Start</button>
         <div class="variant-buttons">
-            <button class="variant-button" id="variant1">Variant 1</button>
-            <button class="variant-button" id="variant2">Variant 2</button>
-            <button class="variant-button" id="variant3">Variant 3</button>
+            <button id="variant1" class="variant-button"></button>
+            <button id="variant2" class="variant-button"></button>
+            <button id="variant3" class="variant-button"></button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tone@latest/build/Tone.min.js"></script>
