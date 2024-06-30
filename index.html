@@ -72,15 +72,21 @@
             justify-content: center;
             gap: 10px;
             width: 250px; /* Set a fixed width for buttons */
-            background: url('switch-camera-icon.png') no-repeat center center; /* Background image */
-            background-size: contain; /* Adjust background image size */
-            text-indent: -9999px; /* Hide button text */
         }
         button:hover {
             background-color: #45a049;
         }
         .controls {
             margin: 10px 0; /* Reduced margin to bring buttons closer to the video container */
+        }
+        #camera-switch {
+            background-color: #3498db; /* Different background color for switch camera button */
+            width: auto; /* Adjust width to fit icon */
+            padding: 10px; /* Adjust padding to fit the icon size */
+        }
+        #camera-switch .fa-sync-alt {
+            font-size: 24px; /* Increase size of the arrow icon */
+            color: white;
         }
         
         @media (max-width: 768px) {
@@ -94,6 +100,9 @@
             }
             button {
                 width: 200px; /* Adjust button width for medium screens */
+            }
+            #camera-switch .fa-sync-alt {
+                font-size: 20px; /* Adjust icon size for medium screens */
             }
         }
         @media (max-width: 480px) {
@@ -117,6 +126,9 @@
                 width: 100%; /* Full width on very small screens */
                 max-width: 200px; /* Max width to ensure buttons don't get too large */
             }
+            #camera-switch .fa-sync-alt {
+                font-size: 24px; /* Adjust icon size for small screens */
+            }
         }
     </style>
 </head>
@@ -129,8 +141,7 @@
     <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
     <div class="controls">
         <button id="camera-switch">
-            <i class="fas fa-camera"></i>
-            <!-- Camera icon will be part of the background image -->
+            <i class="fas fa-sync-alt"></i> <!-- Arrow icon only -->
         </button>
         <button id="start-stop">Start</button>
     </div>
