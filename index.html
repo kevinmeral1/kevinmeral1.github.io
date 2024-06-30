@@ -72,6 +72,9 @@
             justify-content: center;
             gap: 10px;
             width: 250px; /* Set a fixed width for buttons */
+            background: url('switch-camera-icon.png') no-repeat center center; /* Background image */
+            background-size: contain; /* Adjust background image size */
+            text-indent: -9999px; /* Hide button text */
         }
         button:hover {
             background-color: #45a049;
@@ -127,7 +130,7 @@
     <div class="controls">
         <button id="camera-switch">
             <i class="fas fa-camera"></i>
-            <i class="fas fa-sync-alt"></i> <!-- Arrow icon for switching -->
+            <!-- Camera icon will be part of the background image -->
         </button>
         <button id="start-stop">Start</button>
     </div>
