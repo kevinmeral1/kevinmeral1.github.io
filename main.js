@@ -139,8 +139,8 @@ function analyzeColor() {
     let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
 
     // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 0.4; // minimum duration of a note in seconds
-    let maxDuration = 1.5; // maximum duration of a note in seconds
+    let minDuration = 0.8; // minimum duration of a note in seconds
+    let maxDuration = 2.5; // maximum duration of a note in seconds
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
     // Only play note if lightness is above the threshold (not too dark)
@@ -165,7 +165,7 @@ function analyzeColor() {
 document.getElementById('start-stop').addEventListener('click', async () => {
     if (!isRunning) {
         await Tone.start();
-        interval = setInterval(analyzeColor, 100);
+        interval = setInterval(analyzeColor, 200); // Increased interval to slow down rhythm
         isRunning = true;
         document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
     } else {
