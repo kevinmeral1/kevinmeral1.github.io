@@ -5,7 +5,6 @@ let interval;
 let isRunning = false;
 let currentStream;
 let cameraFacing = 'user'; // Initial camera facing mode
-let previousHSL = { h: 0, s: 0, l: 0 }; // Store previous HSL values to maintain rhythm
 
 // Create a synthesizer with effects
 let synth = new Tone.PolySynth(Tone.Synth, {
@@ -139,16 +138,19 @@ function analyzeColor() {
     let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
 
     // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 1.5; // minimum duration of a note in seconds
-    let maxDuration = 4; // maximum duration of a note in seconds
+    let minDuration = 2; // minimum duration of a note in seconds
+    let maxDuration = 5; // maximum duration of a note in seconds
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Only play note if lightness is above the threshold (not too dark)
+    // Adjust the rhythm interval based on lightness
+    let minInterval = 500; // minimum interval in milliseconds (faster rhythm for brighter colors)
+    let maxInterval = 1500; // maximum interval in milliseconds (slower rhythm for darker colors)
+    let intervalDuration = minInterval + ((100 - lightness) / 100) * (maxInterval - minInterval);
+
+    // If the lightness is above the threshold, play the note and update the rhythm interval
     if (lightness > darknessThreshold) {
-        // Play the chord with a rhythmic pattern
         synth.triggerAttackRelease(chord, duration);
     } else {
-        // If too dark, do not play a note but keep the rhythm
         synth.triggerRelease();
     }
 
@@ -160,12 +162,18 @@ function analyzeColor() {
     // Set the border color based on the HSL values
     let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
     document.getElementById('video-container').style.borderColor = hslString;
+
+    // Update interval duration to reflect the current lightness
+    if (interval) {
+        clearInterval(interval);
+        interval = setInterval(analyzeColor, intervalDuration); // Reset interval based on new lightness value
+    }
 }
 
 document.getElementById('start-stop').addEventListener('click', async () => {
     if (!isRunning) {
         await Tone.start();
-        interval = setInterval(analyzeColor, 500); // Further increased interval to slow down rhythm
+        interval = setInterval(analyzeColor, 500); // Start with an initial interval
         isRunning = true;
         document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
     } else {
