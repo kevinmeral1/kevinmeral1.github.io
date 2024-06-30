@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 20px 0; /* Reduced padding to bring content closer to top and bottom edges */
+            padding: 20px 0; /* Padding to bring content closer to top and bottom edges */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -21,7 +21,7 @@
         }
         h1 {
             margin: 10px 0; /* Reduced margin to bring h1 closer to the top */
-            font-size: 80px; /* Slightly increased font size */
+            font-size: 80px; /* Increased font size */
             color: white;
             font-family: 'Roboto', sans-serif; /* Applied new font family */
         }
@@ -29,7 +29,7 @@
             width: 60%;
             max-width: 500px;
             aspect-ratio: 1 / 1; /* Keeps the container square */
-            margin: 10px 0; /* Adjusted margin to reduce space around video container */
+            margin: 10px 0; /* Reduced margin to bring it closer to other elements */
             border-radius: 50%;
             overflow: hidden;
             position: relative;
@@ -66,7 +66,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 10px 0; /* Increased margin to bring buttons closer together */
+            margin: 10px 0; /* Margin between buttons and other elements */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -77,28 +77,29 @@
             background-color: #45a049;
         }
         .controls {
-            margin: 10px 0; /* Reduced margin to bring buttons closer to the video container */
+            margin: 5px 0; /* Reduced margin to bring controls closer to the video container */
         }
         #camera-switch {
             background: none; /* Remove background */
             border: none; /* Remove border */
             padding: 2px; /* Reduced padding */
-            width: 60px; /* Set a fixed width to ensure the button is wide enough for the icon */
-            height: 60px; /* Set a fixed height to match the width */
+            width: 60px; /* Fixed width to ensure the button is wide enough for the icon */
+            height: 60px; /* Fixed height to match the width */
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer; /* Pointer cursor to indicate clickable */
+            margin: 0; /* Removed margin to position it closer to other elements */
         }
         #camera-switch .fa-sync-alt {
-            font-size: 36px; /* Increase size of the arrow icon */
+            font-size: 36px; /* Increased size of the arrow icon */
             color: white; /* Set icon color */
         }
         .button-wrapper {
             display: flex;
             justify-content: center;
             width: 100%; /* Ensure wrapper takes full width */
-            margin: 20px 0; /* Margin to space it out from other elements */
+            margin: 10px 0; /* Margin to space it out from other elements */
         }
         /* Media query for better responsiveness */
         @media (max-width: 768px) {
@@ -107,7 +108,7 @@
                 max-width: 400px;
             }
             h1 {
-                font-size: 60px; /* Increased font size for medium screens */
+                font-size: 60px; /* Adjusted font size */
                 margin: 10px 0; /* Adjusted margin */
             }
             button {
@@ -130,13 +131,13 @@
                 margin: 15px 0; /* Adjusted margin */
             }
             h1 {
-                font-size: 50px; /* Increased font size for small screens */
+                font-size: 50px; /* Adjusted font size for small screens */
                 margin: 10px 0; /* Adjusted margin */
             }
             .controls {
                 flex-direction: column;
                 align-items: center;
-                margin: 10px 0; /* Adjusted margin */
+                margin: 5px 0; /* Reduced margin */
             }
             button {
                 width: 100%; /* Full width on very small screens */
