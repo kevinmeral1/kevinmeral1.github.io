@@ -101,6 +101,25 @@
             width: 100%; /* Ensure wrapper takes full width */
             margin: 10px 0; /* Margin to space it out from other elements */
         }
+        .variant-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .variant-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .variant-button:hover {
+            background-color: #2980B9;
+        }
         /* Media query for better responsiveness */
         @media (max-width: 768px) {
             #video-container {
@@ -150,6 +169,15 @@
             #camera-switch .fa-sync-alt {
                 font-size: 32px; /* Adjust icon size for small screens */
             }
+            .variant-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            .variant-button {
+                width: 100%;
+                max-width: 100px;
+            }
         }
     </style>
 </head>
@@ -167,6 +195,11 @@
             </button>
         </div>
         <button id="start-stop">Start</button>
+        <div class="variant-buttons">
+            <button class="variant-button" id="variant1">Variant 1</button>
+            <button class="variant-button" id="variant2">Variant 2</button>
+            <button class="variant-button" id="variant3">Variant 3</button>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tone@latest/build/Tone.min.js"></script>
     <script src="main.js"></script>
