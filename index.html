@@ -80,15 +80,17 @@
             margin: 10px 0; /* Reduced margin to bring buttons closer to the video container */
         }
         #camera-switch {
-            background-color: #3498db; /* Different background color for switch camera button */
-            width: auto; /* Adjust width to fit icon */
+            background: none; /* Remove background */
+            border: none; /* Remove border */
             padding: 10px; /* Adjust padding to fit the icon size */
+            width: auto; /* Adjust width to fit the icon */
+            cursor: pointer; /* Pointer cursor to indicate clickable */
         }
         #camera-switch .fa-sync-alt {
             font-size: 24px; /* Increase size of the arrow icon */
-            color: white;
+            color: white; /* Set icon color */
         }
-        
+        /* Media query for better responsiveness */
         @media (max-width: 768px) {
             #video-container {
                 width: 80%;
