@@ -58,7 +58,7 @@
             border-radius: 50%;
         }
         button {
-            padding: 15px 30px;
+            padding: 15px 40px; /* Increased padding for wider buttons */
             font-size: 18px;
             background-color: #4CAF50;
             color: white;
@@ -66,11 +66,12 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 5px 0; /* Reduced margin to bring buttons closer together */
+            margin: 10px 0; /* Increased margin to bring buttons closer together */
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            width: 250px; /* Set a fixed width for buttons */
         }
         button:hover {
             background-color: #45a049;
@@ -87,6 +88,9 @@
             h1 {
                 font-size: 60px; /* Increased font size for medium screens */
                 margin: 10px 0; /* Adjusted margin */
+            }
+            button {
+                width: 200px; /* Adjust button width for medium screens */
             }
         }
         @media (max-width: 480px) {
@@ -107,8 +111,8 @@
                 margin: 10px 0; /* Adjusted margin */
             }
             button {
-                width: 100%;
-                max-width: 200px;
+                width: 100%; /* Full width on very small screens */
+                max-width: 200px; /* Max width to ensure buttons don't get too large */
             }
         }
     </style>
