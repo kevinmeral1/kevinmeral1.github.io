@@ -7,16 +7,43 @@ let currentStream;
 let cameraFacing = 'user'; // Initial camera facing mode
 let previousHSL = { h: 0, s: 0, l: 0 }; // Store previous HSL values to maintain rhythm
 let analyzeInterval = 1000; // Start with a 1-second interval
+let currentVariant = 1; // Initial variant
 
-// Create a synthesizer with effects
-let synth = new Tone.PolySynth(Tone.FMSynth, {
-    maxPolyphony: 4,
-    volume: -10 // Adjusted volume
-}).toDestination();
+// Synthesizer and parameters for each variant
+let variants = [
+    {
+        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        minDuration: 0.5,
+        maxDuration: 2,
+        filter: new Tone.Filter(800, "lowpass", -12).toDestination(),
+        reverb: new Tone.Reverb({ decay: 2, wet: 0.4 }).toDestination(),
+        delay: new Tone.FeedbackDelay("8n", 0.35).toDestination(),
+    },
+    {
+        synth: new Tone.PolySynth(Tone.AMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        minDuration: 0.2,
+        maxDuration: 1.5,
+        filter: new Tone.Filter(1000, "highpass", -12).toDestination(),
+        reverb: new Tone.Reverb({ decay: 3, wet: 0.5 }).toDestination(),
+        delay: new Tone.FeedbackDelay("4n", 0.5).toDestination(),
+    },
+    {
+        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        minDuration: 0.1,
+        maxDuration: 1,
+        filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1, wet: 0.3 }).toDestination(),
+        delay: new Tone.FeedbackDelay("16n", 0.2).toDestination(),
+    },
+];
 
-let filter = new Tone.Filter(800, "lowpass", -12).toDestination();
-let reverb = new Tone.Reverb({ decay: 2, wet: 0.4 }).toDestination();
-let delay = new Tone.FeedbackDelay("8n", 0.35).toDestination();
+// Initialize current variant
+let synth = variants[currentVariant - 1].synth;
+let minDuration = variants[currentVariant - 1].minDuration;
+let maxDuration = variants[currentVariant - 1].maxDuration;
+let filter = variants[currentVariant - 1].filter;
+let reverb = variants[currentVariant - 1].reverb;
+let delay = variants[currentVariant - 1].delay;
 synth.connect(filter);
 filter.connect(reverb);
 reverb.connect(delay);
@@ -140,8 +167,6 @@ function analyzeColor() {
     let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
 
     // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 0.5; // minimum duration of a note in seconds
-    let maxDuration = 2; // maximum duration of a note in seconds
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
     // Only play note if lightness is above the threshold (not too dark)
@@ -191,4 +216,32 @@ document.getElementById('camera-switch').addEventListener('click', () => {
     startCamera();
 });
 
-window.onload = startCamera;
+document.getElementById('variant1').addEventListener('click', () => {
+    switchVariant(1);
+});
+
+document.getElementById('variant2').addEventListener('click', () => {
+    switchVariant(2);
+});
+
+document.getElementById('variant3').addEventListener('click', () => {
+    switchVariant(3);
+});
+
+function switchVariant(variantNumber) {
+    // Update the current variant
+    currentVariant = variantNumber;
+    // Update synth and parameters
+    synth = variants[currentVariant - 1].synth;
+    minDuration = variants[currentVariant - 1].minDuration;
+    maxDuration = variants[currentVariant - 1].maxDuration;
+    filter = variants[currentVariant - 1].filter;
+    reverb = variants[currentVariant - 1].reverb;
+    delay = variants[currentVariant - 1].delay;
+    synth.connect(filter);
+    filter.connect(reverb);
+    reverb.connect(delay);
+}
+
+// Initialize the camera on page load
+startCamera();
