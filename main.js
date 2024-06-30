@@ -9,14 +9,14 @@ let previousHSL = { h: 0, s: 0, l: 0 }; // Store previous HSL values to maintain
 let analyzeInterval = 1000; // Start with a 1-second interval
 
 // Create a synthesizer with effects
-let synth = new Tone.PolySynth(Tone.Synth, {
+let synth = new Tone.PolySynth(Tone.FMSynth, {
     maxPolyphony: 4,
-    volume: -15 // Reduced volume
+    volume: -10 // Adjusted volume
 }).toDestination();
 
-let filter = new Tone.Filter(1000, "lowpass", -12).toDestination();
-let reverb = new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination();
-let delay = new Tone.FeedbackDelay("8n", 0.25).toDestination();
+let filter = new Tone.Filter(800, "lowpass", -12).toDestination();
+let reverb = new Tone.Reverb({ decay: 2, wet: 0.4 }).toDestination();
+let delay = new Tone.FeedbackDelay("8n", 0.35).toDestination();
 synth.connect(filter);
 filter.connect(reverb);
 reverb.connect(delay);
@@ -112,7 +112,7 @@ function analyzeColor() {
     let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
     let scaleIndex = Math.floor((hue / 360) * scale.length);
     let note = scale[scaleIndex];
-    
+
     // Determine the chord based on hue
     let chord;
     switch (Math.floor(hue / 60) % 6) {
@@ -140,8 +140,8 @@ function analyzeColor() {
     let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
 
     // Map lightness to note duration (longer notes for darker colors)
-    let minDuration = 1.5; // minimum duration of a note in seconds
-    let maxDuration = 4; // maximum duration of a note in seconds
+    let minDuration = 0.5; // minimum duration of a note in seconds
+    let maxDuration = 2; // maximum duration of a note in seconds
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
     // Only play note if lightness is above the threshold (not too dark)
