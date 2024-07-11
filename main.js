@@ -227,6 +227,15 @@ document.getElementById('variant2').addEventListener('click', () => {
 document.getElementById('variant3').addEventListener('click', () => {
     switchVariant(3);
 });
+document.querySelectorAll('.variant-button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.variant-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+    });
+});
+
 
 function switchVariant(variantNumber) {
     // Update the current variant
