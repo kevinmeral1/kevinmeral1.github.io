@@ -22,7 +22,7 @@
         h1 {
             margin: 10px 0;
             font-size: 80px;
-            color: black;
+            color: white;
             font-family: 'Roboto', sans-serif;
         }
         #video-container {
@@ -69,17 +69,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            color: black;
+            color: white;
+            background-color: #333;
         }
         button:hover {
             background-color: #45a049;
+        }
+        button.active {
+    background-color: #555; /* Abdunkeln des Buttons, wenn aktiv */
         }
         .controls {
             margin: 5px 0;
         }
         #start-stop {
             background-color: #4CAF50;
-            color: black;
+            color: white;
             margin: 0 auto;
         }
         #camera-switch {
@@ -116,12 +120,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            color: black;
+            color: white;
             width: 80px;
-        }
-        .variant-button.selected {
-            border: 2px solid black;
-            background-color: #ccc;
         }
         #variant1 {
             background-color: #FFEB3B; /* Sättigteres Gelb */
