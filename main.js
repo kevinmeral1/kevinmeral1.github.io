@@ -216,19 +216,11 @@ document.getElementById('camera-switch').addEventListener('click', () => {
     startCamera();
 });
 
-document.getElementById('variant1').addEventListener('click', () => {
-    switchVariant(1);
-    updateSelectedButton('variant1');
-});
-
-document.getElementById('variant2').addEventListener('click', () => {
-    switchVariant(2);
-    updateSelectedButton('variant2');
-});
-
-document.getElementById('variant3').addEventListener('click', () => {
-    switchVariant(3);
-    updateSelectedButton('variant3');
+document.querySelectorAll('.variant-button').forEach(button => {
+    button.addEventListener('click', () => {
+        switchVariant(parseInt(button.id.replace('variant', '')));
+        updateSelectedButton(button);
+    });
 });
 
 function switchVariant(variantNumber) {
@@ -246,14 +238,13 @@ function switchVariant(variantNumber) {
     reverb.connect(delay);
 }
 
-function updateSelectedButton(selectedId) {
-    // Remove 'selected' class from all variant buttons
+function updateSelectedButton(selectedButton) {
+    // Remove the 'selected' class from all buttons
     document.querySelectorAll('.variant-button').forEach(button => {
         button.classList.remove('selected');
     });
-
-    // Add 'selected' class to the currently clicked button
-    document.getElementById(selectedId).classList.add('selected');
+    // Add the 'selected' class to the clicked button
+    selectedButton.classList.add('selected');
 }
 
 // Initialize the camera on page load
