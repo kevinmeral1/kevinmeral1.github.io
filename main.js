@@ -124,6 +124,12 @@ function rgbToHsl(r, g, b) {
     };
 }
 
+// Function to smoothly update Tone.js parameters
+function smoothUpdateParam(param, value, rampTime = 0.1) {
+    param.cancelScheduledValues(0);
+    param.linearRampToValueAtTime(value, Tone.now() + rampTime);
+}
+
 function analyzeColor() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -169,14 +175,10 @@ function analyzeColor() {
     // Map lightness to note duration (longer notes for darker colors)
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Update filter frequency based on hue (200 - 2000 Hz)
-    filter.frequency.value = 200 + (hue / 360) * 1800;
-
-    // Update reverb wet value based on saturation (0 - 1)
-    reverb.wet.value = saturation / 100;
-
-    // Update delay time based on lightness (0.1 - 1 second)
-    delay.delayTime.value = 0.1 + (lightness / 100) * 0.9;
+    // Smoothly update filter frequency, reverb wet, and delay time
+    smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000); // Filter frequency between 1000 and 5000 Hz
+    smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 1
+    smoothUpdateParam(delay.delayTime, 0.1 + (lightness / 100) * 0.9); // Delay time between 0.1 and 1 second
 
     // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
