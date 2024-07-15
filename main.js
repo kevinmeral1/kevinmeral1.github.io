@@ -20,7 +20,7 @@ let variants = [
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
     },
     {
-        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -10 }).toDestination(),
         minDuration: 0.3,
         maxDuration: 1.5,
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
@@ -28,7 +28,7 @@ let variants = [
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
     },
     {
-        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1,
         filter: new Tone.Filter(800, "bandpass", -12).toDestination(),
