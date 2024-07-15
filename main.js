@@ -12,15 +12,15 @@ let currentVariant = 1; // Initial variant
 // Synthesizer and parameters for each variant
 let variants = [
     {
-        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.5,
         maxDuration: 2,
-        filter: new Tone.Filter(800, "lowpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 2, wet: 0.4 }).toDestination(),
-        delay: new Tone.FeedbackDelay("8n", 0.35).toDestination(),
+        filter: new Tone.Filter(1000, "lowpass", -6).toDestination(),
+        reverb: new Tone.Reverb({ decay: 3, wet: 0.3 }).toDestination(),
+        delay: new Tone.FeedbackDelay("8n", 0.3).toDestination(),
     },
     {
-        synth: new Tone.PolySynth(Tone.AMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1.5,
         filter: new Tone.Filter(1000, "highpass", -12).toDestination(),
@@ -135,12 +135,38 @@ function analyzeColor() {
     // Define a threshold for darkness
     const darknessThreshold = 20; // below this lightness value is considered too dark
 
-    // Diatonic scale (C major)
-    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-    let scaleIndex = Math.floor((hue / 360) * scale.length);
-    let note = scale[scaleIndex];
-
     // Determine the chord based on hue
+    let chord = getChord(hue);
+
+    // Map lightness to volume (0 dB at white to silence at black)
+    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
+
+    // Map lightness to note duration (longer notes for darker colors)
+    let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
+
+    // Only play note if lightness is above the threshold (not too dark)
+    if (lightness > darknessThreshold) {
+        playArpeggio(chord, duration);
+    } else {
+        synth.triggerRelease();
+    }
+
+    // Update previous HSL values only if color has changed
+    if (hslColor.h !== previousHSL.h || hslColor.s !== previousHSL.s || hslColor.l !== previousHSL.l) {
+        previousHSL = hslColor;
+    }
+
+    // Set the border color based on the HSL values
+    let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
+    document.getElementById('video-container').style.borderColor = hslString;
+
+    // Adjust analyze interval based on lightness (brightness)
+    clearInterval(interval); // Clear the previous interval
+    analyzeInterval = 1000 - (lightness * 10); // Example mapping, adjust as needed
+    interval = setInterval(analyzeColor, analyzeInterval); // Set the new interval
+}
+
+function getChord(hue) {
     let chord;
     switch (Math.floor(hue / 60) % 6) {
         case 0:
@@ -162,35 +188,23 @@ function analyzeColor() {
             chord = ["A4", "C#5", "E5"]; // A Major
             break;
     }
+    return chord;
+}
 
-    // Map lightness to volume (0 dB at white to silence at black)
-    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
+function playArpeggio(chord, duration) {
+    let time = 0;
+    chord.forEach(note => {
+        synth.triggerAttackRelease(note, duration / 4, time); // 4 Noten pro Akkord
+        time += duration / 4; // Zeit zwischen den Noten
+    });
+}
 
-    // Map lightness to note duration (longer notes for darker colors)
+function playMelody(hue, lightness) {
+    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+    let melodyNote = scale[Math.floor((hue / 360) * scale.length)];
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Only play note if lightness is above the threshold (not too dark)
-    if (lightness > darknessThreshold) {
-        // Play the chord with a rhythmic pattern
-        synth.triggerAttackRelease(chord, duration);
-    } else {
-        // If too dark, do not play a note but keep the rhythm
-        synth.triggerRelease();
-    }
-
-    // Update previous HSL values only if color has changed
-    if (hslColor.h !== previousHSL.h || hslColor.s !== previousHSL.s || hslColor.l !== previousHSL.l) {
-        previousHSL = hslColor;
-    }
-
-    // Set the border color based on the HSL values
-    let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
-    document.getElementById('video-container').style.borderColor = hslString;
-
-    // Adjust analyze interval based on lightness (brightness)
-    clearInterval(interval); // Clear the previous interval
-    analyzeInterval = 1000 - (lightness * 10); // Example mapping, adjust as needed
-    interval = setInterval(analyzeColor, analyzeInterval); // Set the new interval
+    synth.triggerAttackRelease(melodyNote, duration);
 }
 
 document.getElementById('start-stop').addEventListener('click', async () => {
