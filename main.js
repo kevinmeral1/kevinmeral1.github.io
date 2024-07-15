@@ -34,44 +34,74 @@ let variants = [
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 1, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.2).toDestination(),
-    },
+    }
 ];
 
-// Initialize current variant
-let synth = variants[currentVariant - 1].synth;
-let minDuration = variants[currentVariant - 1].minDuration;
-let maxDuration = variants[currentVariant - 1].maxDuration;
-let filter = variants[currentVariant - 1].filter;
-let reverb = variants[currentVariant - 1].reverb;
-let delay = variants[currentVariant - 1].delay;
-synth.connect(filter);
-filter.connect(reverb);
-reverb.connect(delay);
+// Initial routing for each variant
+variants.forEach(variant => {
+    variant.synth.chain(variant.filter, variant.reverb, variant.delay);
+});
 
+// Get user media
+async function getUserMedia(constraints) {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    return stream;
+}
+
+// Start camera
 async function startCamera() {
     try {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+        }
         const constraints = {
             video: {
-                facingMode: {
-                    ideal: cameraFacing
-                }
+                facingMode: cameraFacing,
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
             }
         };
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        video.srcObject = stream;
-        currentStream = stream;
-    } catch (err) {
-        console.error("Fehler beim Zugriff auf die Kamera: ", err);
+        currentStream = await getUserMedia(constraints);
+        video.srcObject = currentStream;
+        await Tone.start(); // Ensure Tone.js is started
+        console.log('Audio context started');
+    } catch (error) {
+        console.error('Error accessing camera:', error);
     }
 }
 
-function rgbToHsl(r, g, b) {
-    r /= 255;
-    g /= 255;
-    b /= 255;
+// Switch camera
+document.getElementById('camera-switch').addEventListener('click', () => {
+    cameraFacing = (cameraFacing === 'user') ? 'environment' : 'user';
+    startCamera();
+});
 
-    let max = Math.max(r, g, b);
-    let min = Math.min(r, g, b);
+// Capture and analyze color
+function captureAndAnalyzeColor() {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    let frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let length = frame.data.length;
+    let totalR = 0, totalG = 0, totalB = 0;
+
+    for (let i = 0; i < length; i += 4) {
+        totalR += frame.data[i];
+        totalG += frame.data[i + 1];
+        totalB += frame.data[i + 2];
+    }
+
+    let avgR = totalR / (length / 4);
+    let avgG = totalG / (length / 4);
+    let avgB = totalB / (length / 4);
+
+    let hsl = rgbToHsl(avgR, avgG, avgB);
+
+    playSound(hsl);
+}
+
+// Convert RGB to HSL
+function rgbToHsl(r, g, b) {
+    r /= 255, g /= 255, b /= 255;
+    let max = Math.max(r, g, b), min = Math.min(r, g, b);
     let h, s, l = (max + min) / 2;
 
     if (max === min) {
@@ -80,168 +110,73 @@ function rgbToHsl(r, g, b) {
         let d = max - min;
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
         switch (max) {
-            case r:
-                h = (g - b) / d + (g < b ? 6 : 0);
-                break;
-            case g:
-                h = (b - r) / d + 2;
-                break;
-            case b:
-                h = (r - g) / d + 4;
-                break;
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
         }
         h /= 6;
     }
 
-    return {
-        h: Math.round(h * 360),
-        s: Math.round(s * 100),
-        l: Math.round(l * 100)
-    };
+    return { h, s, l };
 }
 
-function analyzeColor() {
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    const points = [
-        { x: canvas.width / 2, y: canvas.height / 2 },
-        { x: canvas.width / 2 - 10, y: canvas.height / 2 },
-        { x: canvas.width / 2 + 10, y: canvas.height / 2 },
-        { x: canvas.width / 2, y: canvas.height / 2 - 10 },
-        { x: canvas.width / 2, y: canvas.height / 2 + 10 },
-    ];
-
-    let totalColor = { r: 0, g: 0, b: 0 };
-    points.forEach(point => {
-        let imageData = ctx.getImageData(point.x, point.y, 1, 1);
-        totalColor.r += imageData.data[0];
-        totalColor.g += imageData.data[1];
-        totalColor.b += imageData.data[2];
-    });
-
-    let averageColor = {
-        r: totalColor.r / points.length,
-        g: totalColor.g / points.length,
-        b: totalColor.b / points.length,
-    };
-
-    let hslColor = rgbToHsl(averageColor.r, averageColor.g, averageColor.b);
-
-    // Map HSL to musical parameters
-    let hue = hslColor.h; // 0 - 360
-    let saturation = hslColor.s; // 0 - 100
-    let lightness = hslColor.l; // 0 - 100
-
-    // Define a threshold for darkness
-    const darknessThreshold = 20; // below this lightness value is considered too dark
-
-    // Diatonic scale (C major)
-    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-    let scaleIndex = Math.floor((hue / 360) * scale.length);
-    let note = scale[scaleIndex];
-
-    // Determine the chord based on hue
-    let chord;
-    switch (Math.floor(hue / 60) % 6) {
-        case 0:
-            chord = ["C4", "E4", "G4"]; // C Major
-            break;
-        case 1:
-            chord = ["D4", "F#4", "A4"]; // D Major
-            break;
-        case 2:
-            chord = ["E4", "G#4", "B4"]; // E Major
-            break;
-        case 3:
-            chord = ["F4", "A4", "C5"]; // F Major
-            break;
-        case 4:
-            chord = ["G4", "B4", "D5"]; // G Major
-            break;
-        case 5:
-            chord = ["A4", "C#5", "E5"]; // A Major
-            break;
-    }
-
-    // Map lightness to volume (0 dB at white to silence at black)
-    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
-
-    // Map lightness to note duration (longer notes for darker colors)
-    let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
-
-    // Only play note if lightness is above the threshold (not too dark)
-    if (lightness > darknessThreshold) {
-        // Play the chord with a rhythmic pattern
-        synth.triggerAttackRelease(chord, duration);
-    } else {
-        // If too dark, do not play a note but keep the rhythm
-        synth.triggerRelease();
-    }
-
-    // Update previous HSL values only if color has changed
-    if (hslColor.h !== previousHSL.h || hslColor.s !== previousHSL.s || hslColor.l !== previousHSL.l) {
-        previousHSL = hslColor;
-    }
-
-    // Set the border color based on the HSL values
-    let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
-    document.getElementById('video-container').style.borderColor = hslString;
-
-    // Adjust analyze interval based on lightness (brightness)
-    clearInterval(interval); // Clear the previous interval
-    analyzeInterval = 1000 - (lightness * 10); // Example mapping, adjust as needed
-    interval = setInterval(analyzeColor, analyzeInterval); // Set the new interval
+// Map HSL to frequency
+function hslToFrequency(h, s, l) {
+    const minFrequency = 200;
+    const maxFrequency = 1000;
+    return minFrequency + (maxFrequency - minFrequency) * h;
 }
 
-document.getElementById('start-stop').addEventListener('click', async () => {
+// Map lightness to volume
+function lightnessToVolume(l) {
+    const minVolume = -20;
+    const maxVolume = 0;
+    return minVolume + (maxVolume - minVolume) * l;
+}
+
+// Map saturation to interval
+function saturationToInterval(s) {
+    const minInterval = 200;
+    const maxInterval = 2000;
+    return minInterval + (maxInterval - minInterval) * (1 - s);
+}
+
+// Play sound based on color
+function playSound(hsl) {
+    let frequency = hslToFrequency(hsl.h, hsl.s, hsl.l);
+    let volume = lightnessToVolume(hsl.l);
+    analyzeInterval = saturationToInterval(hsl.s);
+
+    let noteDuration = variants[currentVariant - 1].minDuration + (variants[currentVariant - 1].maxDuration - variants[currentVariant - 1].minDuration) * hsl.l;
+
+    variants[currentVariant - 1].synth.volume.value = volume;
+    variants[currentVariant - 1].synth.triggerAttackRelease(frequency, noteDuration);
+
+    setTimeout(captureAndAnalyzeColor, analyzeInterval);
+}
+
+// Start/Stop button event listener
+document.getElementById('start-stop').addEventListener('click', () => {
     if (!isRunning) {
-        await Tone.start();
-        interval = setInterval(analyzeColor, analyzeInterval); // Start with the initial interval
         isRunning = true;
-        document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
+        captureAndAnalyzeColor();
+        document.getElementById('start-stop').textContent = 'Stop';
     } else {
-        clearInterval(interval);
         isRunning = false;
-        document.getElementById('start-stop').textContent = 'Start'; // Change button text to Start
+        clearInterval(interval);
+        document.getElementById('start-stop').textContent = 'Start';
     }
 });
 
-document.getElementById('camera-switch').addEventListener('click', () => {
-    if (currentStream) {
-        currentStream.getTracks().forEach(track => {
-            track.stop();
-        });
-    }
-    cameraFacing = cameraFacing === 'user' ? 'environment' : 'user';
-    startCamera();
+// Variant buttons event listeners
+document.querySelectorAll('.variant-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+        document.querySelectorAll('.variant-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        currentVariant = parseInt(button.id.replace('variant', ''));
+    });
 });
 
-document.getElementById('variant1').addEventListener('click', () => {
-    switchVariant(1);
-});
-
-document.getElementById('variant2').addEventListener('click', () => {
-    switchVariant(2);
-});
-
-document.getElementById('variant3').addEventListener('click', () => {
-    switchVariant(3);
-});
-
-function switchVariant(variantNumber) {
-    // Update the current variant
-    currentVariant = variantNumber;
-    // Update synth and parameters
-    synth = variants[currentVariant - 1].synth;
-    minDuration = variants[currentVariant - 1].minDuration;
-    maxDuration = variants[currentVariant - 1].maxDuration;
-    filter = variants[currentVariant - 1].filter;
-    reverb = variants[currentVariant - 1].reverb;
-    delay = variants[currentVariant - 1].delay;
-    synth.connect(filter);
-    filter.connect(reverb);
-    reverb.connect(delay);
-}
-
-// Initialize the camera on page load
+// Initial setup
 startCamera();
+document.getElementById('variant1').classList.add('active'); // Set initial active variant
