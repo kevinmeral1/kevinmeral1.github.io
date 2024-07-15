@@ -12,11 +12,11 @@ let currentVariant = 1; // Initial variant
 // Synthesizer and parameters for each variant
 let variants = [
     {
-        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -20 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.5,
         maxDuration: 2,
         filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination(),
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
         chords: {
             0: ["C4", "E4", "G4", "B4"], // Cmaj7
@@ -28,11 +28,11 @@ let variants = [
         }
     },
     {
-        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -20 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -10 }).toDestination(),
         minDuration: 0.3,
         maxDuration: 1.5,
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 3, wet: 0.7 }).toDestination(),
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
         chords: {
             0: ["C4", "G4", "C5"],       // C power chord
@@ -44,11 +44,11 @@ let variants = [
         }
     },
     {
-        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -20 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1,
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.3).toDestination(),
         chords: {
             0: ["C4", "Eb4", "G4", "Bb4"], // Cm7
@@ -124,12 +124,6 @@ function rgbToHsl(r, g, b) {
     };
 }
 
-// Function to smoothly update Tone.js parameters
-function smoothUpdateParam(param, value, rampTime = 0.1) {
-    param.cancelScheduledValues(0);
-    param.linearRampToValueAtTime(value, Tone.now() + rampTime);
-}
-
 function analyzeColor() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -175,15 +169,10 @@ function analyzeColor() {
     // Map lightness to note duration (longer notes for darker colors)
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Smoothly update filter frequency, reverb wet, and delay time
-    smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000); // Filter frequency between 1000 and 5000 Hz
-    smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 0.3
-    smoothUpdateParam(delay.delayTime, lightness / 100); // Delay time between 0.1 and 1 second
-
     // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
         // Play the chord with a rhythmic pattern
-        synth.triggerAttackRelease(chord, duration, undefined, volume);
+        synth.triggerAttackRelease(chord, duration);
     } else {
         // If too dark, do not play a note but keep the rhythm
         synth.triggerRelease();
