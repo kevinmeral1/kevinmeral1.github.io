@@ -16,7 +16,7 @@ let variants = [
         minDuration: 0.5,
         maxDuration: 2,
         filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 2, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
         chords: {
             0: ["C4", "E4", "G4", "B4"], // Cmaj7
@@ -28,11 +28,11 @@ let variants = [
         }
     },
     {
-        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.MetalSynth, { volume: -10 }).toDestination(),
         minDuration: 0.3,
         maxDuration: 1.5,
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 3, wet: 0.7 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
         chords: {
             0: ["C4", "G4", "C5"],       // C power chord
@@ -48,7 +48,7 @@ let variants = [
         minDuration: 0.2,
         maxDuration: 1,
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.3).toDestination(),
         chords: {
             0: ["C4", "Eb4", "G4", "Bb4"], // Cm7
