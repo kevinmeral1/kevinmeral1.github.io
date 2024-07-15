@@ -15,26 +15,50 @@ let variants = [
         synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.5,
         maxDuration: 2,
-        filter: new Tone.Filter(1200, "lowpass", -12).toDestination(),
+        filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination(),
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
+        chords: {
+            0: ["C4", "E4", "G4", "B4"], // Cmaj7
+            1: ["D4", "F4", "A4", "C5"], // Dm7
+            2: ["E4", "G4", "B4", "D5"], // Em7
+            3: ["F4", "A4", "C5", "E5"], // Fmaj7
+            4: ["G4", "B4", "D5", "F5"], // G7
+            5: ["A4", "C5", "E5", "G5"]  // Am7
+        }
     },
     {
         synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -10 }).toDestination(),
         minDuration: 0.3,
         maxDuration: 1.5,
-        filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
+        filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 3, wet: 0.7 }).toDestination(),
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
+        chords: {
+            0: ["C4", "G4", "C5"],       // C power chord
+            1: ["D4", "A4", "D5"],       // D power chord
+            2: ["E4", "B4", "E5"],       // E power chord
+            3: ["F4", "C5", "F5"],       // F power chord
+            4: ["G4", "D5", "G5"],       // G power chord
+            5: ["A4", "E5", "A5"]        // A power chord
+        }
     },
     {
         synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1,
-        filter: new Tone.Filter(800, "bandpass", -12).toDestination(),
+        filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.3).toDestination(),
-    },
+        chords: {
+            0: ["C4", "Eb4", "G4", "Bb4"], // Cm7
+            1: ["D4", "F4", "A4", "C5"],   // Dm7
+            2: ["E4", "G4", "B4", "D5"],   // Em7
+            3: ["F4", "Ab4", "C5", "Eb5"], // Fm7
+            4: ["G4", "Bb4", "D5", "F5"],  // Gm7
+            5: ["A4", "C5", "E5", "G5"]    // Am7
+        }
+    }
 ];
 
 // Initialize current variant
@@ -135,33 +159,9 @@ function analyzeColor() {
     // Define a threshold for darkness
     const darknessThreshold = 20; // below this lightness value is considered too dark
 
-    // Diatonic scale (C major)
-    let scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-    let scaleIndex = Math.floor((hue / 360) * scale.length);
-    let note = scale[scaleIndex];
-
     // Determine the chord based on hue
-    let chord;
-    switch (Math.floor(hue / 60) % 6) {
-        case 0:
-            chord = ["C4", "E4", "G4"]; // C Major
-            break;
-        case 1:
-            chord = ["D4", "F#4", "A4"]; // D Major
-            break;
-        case 2:
-            chord = ["E4", "G#4", "B4"]; // E Major
-            break;
-        case 3:
-            chord = ["F4", "A4", "C5"]; // F Major
-            break;
-        case 4:
-            chord = ["G4", "B4", "D5"]; // G Major
-            break;
-        case 5:
-            chord = ["A4", "C#5", "E5"]; // A Major
-            break;
-    }
+    let chordIndex = Math.floor(hue / 60) % 6;
+    let chord = variants[currentVariant - 1].chords[chordIndex];
 
     // Map lightness to volume (0 dB at white to silence at black)
     let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
