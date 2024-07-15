@@ -119,9 +119,6 @@
             color: white;
             width: 80px;
         }
-        .variant-button.active {
-            border: 2px solid white; /* Make the active button more noticeable */
-        }
         #variant1 {
             background-color: #FFEB3B; /* Sättigteres Gelb */
         }
@@ -130,6 +127,10 @@
         }
         #variant3 {
             background-color: #ADD8E6; /* Hellblau */
+        }
+        .variant-button.selected {
+            border: 3px solid white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
         @media (max-width: 768px) {
             #video-container {
