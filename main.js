@@ -12,7 +12,18 @@ let currentVariant = 1; // Initial variant
 // Synthesizer and parameters for each variant
 let variants = [
     {
-        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.FMSynth({
+            modulationIndex: 10,
+            envelope: {
+                attack: 0.1,
+                decay: 0.2,
+                sustain: 0.5,
+                release: 1
+            },
+            oscillator: {
+                type: "sine"
+            }
+        }).toDestination(),
         minDuration: 0.5,
         maxDuration: 2,
         filter: new Tone.Filter(800, "lowpass", -12).toDestination(),
@@ -20,7 +31,18 @@ let variants = [
         delay: new Tone.FeedbackDelay("8n", 0.35).toDestination(),
     },
     {
-        synth: new Tone.PolySynth(Tone.AMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.AMSynth({
+            harmonicity: 1.5,
+            envelope: {
+                attack: 0.1,
+                decay: 0.2,
+                sustain: 0.5,
+                release: 1
+            },
+            oscillator: {
+                type: "triangle"
+            }
+        }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1.5,
         filter: new Tone.Filter(1000, "highpass", -12).toDestination(),
@@ -28,7 +50,17 @@ let variants = [
         delay: new Tone.FeedbackDelay("4n", 0.5).toDestination(),
     },
     {
-        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.Synth({
+            oscillator: {
+                type: "triangle"
+            },
+            envelope: {
+                attack: 0.05,
+                decay: 0.1,
+                sustain: 0.5,
+                release: 1
+            }
+        }).toDestination(),
         minDuration: 0.1,
         maxDuration: 1,
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
@@ -216,14 +248,24 @@ document.getElementById('camera-switch').addEventListener('click', () => {
     startCamera();
 });
 
-document.querySelectorAll('.variant-button').forEach(button => {
-    button.addEventListener('click', () => {
-        switchVariant(parseInt(button.id.replace('variant', '')));
-        updateSelectedButton(button);
-    });
+document.getElementById('variant1').addEventListener('click', () => {
+    switchVariant(1);
+});
+
+document.getElementById('variant2').addEventListener('click', () => {
+    switchVariant(2);
+});
+
+document.getElementById('variant3').addEventListener('click', () => {
+    switchVariant(3);
 });
 
 function switchVariant(variantNumber) {
+    // Remove the border from all buttons
+    document.querySelectorAll('.var-button').forEach(button => {
+        button.style.borderColor = 'transparent';
+    });
+    
     // Update the current variant
     currentVariant = variantNumber;
     // Update synth and parameters
@@ -236,15 +278,9 @@ function switchVariant(variantNumber) {
     synth.connect(filter);
     filter.connect(reverb);
     reverb.connect(delay);
-}
 
-function updateSelectedButton(selectedButton) {
-    // Remove the 'selected' class from all buttons
-    document.querySelectorAll('.variant-button').forEach(button => {
-        button.classList.remove('selected');
-    });
-    // Add the 'selected' class to the clicked button
-    selectedButton.classList.add('selected');
+    // Add border to the selected variant button
+    document.getElementById(`variant${currentVariant}`).style.borderColor = 'white';
 }
 
 // Initialize the camera on page load
