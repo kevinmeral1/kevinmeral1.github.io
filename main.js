@@ -12,7 +12,7 @@ let currentVariant = 1; // Initial variant
 // Synthesizer and parameters for each variant
 let variants = [
     {
-        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -20 }).toDestination(),
         minDuration: 0.5,
         maxDuration: 2,
         filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
@@ -28,7 +28,7 @@ let variants = [
         }
     },
     {
-        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.MembraneSynth, { volume: -20 }).toDestination(),
         minDuration: 0.3,
         maxDuration: 1.5,
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
@@ -44,7 +44,7 @@ let variants = [
         }
     },
     {
-        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -10 }).toDestination(),
+        synth: new Tone.PolySynth(Tone.FMSynth, { maxPolyphony: 4, volume: -20 }).toDestination(),
         minDuration: 0.2,
         maxDuration: 1,
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
@@ -178,7 +178,7 @@ function analyzeColor() {
     // Smoothly update filter frequency, reverb wet, and delay time
     smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000); // Filter frequency between 1000 and 5000 Hz
     smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 1
-    smoothUpdateParam(delay.delayTime, 0.1 + (lightness / 100) * 0.9); // Delay time between 0.1 and 1 second
+    smoothUpdateParam(delay.delayTime, lightness / 100); // Delay time between 0.1 and 1 second
 
     // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
