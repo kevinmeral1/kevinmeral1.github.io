@@ -18,6 +18,7 @@ let variants = [
         filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination(),
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
+        chorus: new Tone.Chorus(4, 2.5, 0.5).toDestination(),
         chords: {
             0: ["C4", "E4", "G4", "B4"], // Cmaj7
             1: ["D4", "F4", "A4", "C5"], // Dm7
@@ -34,6 +35,7 @@ let variants = [
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 3, wet: 0.7 }).toDestination(),
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
+        chorus: new Tone.Chorus(4, 2.5, 0.5).toDestination(),
         chords: {
             0: ["C4", "G4", "C5"],       // C power chord
             1: ["D4", "A4", "D5"],       // D power chord
@@ -50,6 +52,7 @@ let variants = [
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
         reverb: new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.3).toDestination(),
+        chorus: new Tone.Chorus(4, 2.5, 0.5).toDestination(),
         chords: {
             0: ["C4", "Eb4", "G4", "Bb4"], // Cm7
             1: ["D4", "F4", "A4", "C5"],   // Dm7
@@ -68,9 +71,8 @@ let maxDuration = variants[currentVariant - 1].maxDuration;
 let filter = variants[currentVariant - 1].filter;
 let reverb = variants[currentVariant - 1].reverb;
 let delay = variants[currentVariant - 1].delay;
-synth.connect(filter);
-filter.connect(reverb);
-reverb.connect(delay);
+let chorus = variants[currentVariant - 1].chorus;
+synth.chain(filter, reverb, delay, chorus);
 
 async function startCamera() {
     try {
@@ -176,9 +178,9 @@ function analyzeColor() {
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
     // Smoothly update filter frequency, reverb wet, and delay time
-    smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000); // Filter frequency between 1000 and 5000 Hz
-    smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 1
-    smoothUpdateParam(delay.delayTime, lightness / 100); // Delay time between 0.1 and 1 second
+    smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000);
+    smoothUpdateParam(reverb.wet, saturation / 100);
+    smoothUpdateParam(delay.delayTime, 0.1 + (lightness / 100)); // Delay time between 0.1 and 1 second
 
     // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
@@ -244,9 +246,8 @@ function switchVariant(variantNumber) {
     filter = variants[currentVariant - 1].filter;
     reverb = variants[currentVariant - 1].reverb;
     delay = variants[currentVariant - 1].delay;
-    synth.connect(filter);
-    filter.connect(reverb);
-    reverb.connect(delay);
+    chorus = variants[currentVariant - 1].chorus;
+    synth.chain(filter, reverb, delay, chorus);
 }
 
 function updateSelectedButton(selectedButton) {
