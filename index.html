@@ -63,13 +63,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
             margin: 10px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             color: white;
+            position: relative;
         }
         button:hover {
             background-color: #45a049;
@@ -118,6 +119,7 @@
             cursor: pointer;
             color: white;
             width: 80px;
+            transition: border 0.3s ease, box-shadow 0.3s ease; /* Added transition for smooth effect */
         }
         #variant1 {
             background-color: #FFEB3B; /* Sättigteres Gelb */
@@ -129,8 +131,8 @@
             background-color: #ADD8E6; /* Hellblau */
         }
         .variant-button.selected {
-            border: 3px solid white;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
         @media (max-width: 768px) {
             #video-container {
