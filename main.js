@@ -169,10 +169,19 @@ function analyzeColor() {
     // Map lightness to note duration (longer notes for darker colors)
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
+    // Update filter frequency based on hue (200 - 2000 Hz)
+    filter.frequency.value = 200 + (hue / 360) * 1800;
+
+    // Update reverb wet value based on saturation (0 - 1)
+    reverb.wet.value = saturation / 100;
+
+    // Update delay time based on lightness (0.1 - 1 second)
+    delay.delayTime.value = 0.1 + (lightness / 100) * 0.9;
+
     // Only play note if lightness is above the threshold (not too dark)
     if (lightness > darknessThreshold) {
         // Play the chord with a rhythmic pattern
-        synth.triggerAttackRelease(chord, duration);
+        synth.triggerAttackRelease(chord, duration, undefined, volume);
     } else {
         // If too dark, do not play a note but keep the rhythm
         synth.triggerRelease();
