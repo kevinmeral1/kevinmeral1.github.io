@@ -16,15 +16,15 @@ let variants = [
         minDuration: 0.5,
         maxDuration: 2,
         filter: new Tone.Filter(1000, "lowpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("8n", 0.25).toDestination(),
         chords: {
-            0: ["C3", "E3", "G3", "B3"], // Cmaj7
-            1: ["D3", "F3", "A3", "C4"], // Dm7
-            2: ["E3", "G3", "B3", "D4"], // Em7
-            3: ["F3", "A3", "C4", "E4"], // Fmaj7
-            4: ["G3", "B3", "D4", "F4"], // G7
-            5: ["A3", "C4", "E4", "G4"]  // Am7
+            0: ["C4", "E4", "G4", "B4"], // Cmaj7
+            1: ["D4", "F4", "A4", "C5"], // Dm7
+            2: ["E4", "G4", "B4", "D5"], // Em7
+            3: ["F4", "A4", "C5", "E5"], // Fmaj7
+            4: ["G4", "B4", "D5", "F5"], // G7
+            5: ["A4", "C5", "E5", "G5"]  // Am7
         }
     },
     {
@@ -32,15 +32,15 @@ let variants = [
         minDuration: 0.3,
         maxDuration: 1.5,
         filter: new Tone.Filter(500, "bandpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 3, wet: 0.7 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("4n", 0.4).toDestination(),
         chords: {
-            0: ["C3", "G3", "C4"],       // C power chord
-            1: ["D3", "A3", "D4"],       // D power chord
-            2: ["E3", "B3", "E4"],       // E power chord
-            3: ["F3", "C4", "F4"],       // F power chord
-            4: ["G3", "D4", "G4"],       // G power chord
-            5: ["A3", "E4", "A4"]        // A power chord
+            0: ["C4", "G4", "C5"],       // C power chord
+            1: ["D4", "A4", "D5"],       // D power chord
+            2: ["E4", "B4", "E5"],       // E power chord
+            3: ["F4", "C5", "F5"],       // F power chord
+            4: ["G4", "D5", "G5"],       // G power chord
+            5: ["A4", "E5", "A5"]        // A power chord
         }
     },
     {
@@ -48,15 +48,15 @@ let variants = [
         minDuration: 0.2,
         maxDuration: 1,
         filter: new Tone.Filter(1500, "highpass", -12).toDestination(),
-        reverb: new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination(),
+        reverb: new Tone.Reverb({ decay: 1.5, wet: 0.3 }).toDestination(),
         delay: new Tone.FeedbackDelay("16n", 0.3).toDestination(),
         chords: {
-            0: ["C3", "Eb3", "G3", "Bb3"], // Cm7
-            1: ["D3", "F3", "A3", "C4"],   // Dm7
-            2: ["E3", "G3", "B3", "D4"],   // Em7
-            3: ["F3", "Ab3", "C4", "Eb4"], // Fm7
-            4: ["G3", "Bb3", "D4", "F4"],  // Gm7
-            5: ["A3", "C4", "E4", "G4"]    // Am7
+            0: ["C4", "Eb4", "G4", "Bb4"], // Cm7
+            1: ["D4", "F4", "A4", "C5"],   // Dm7
+            2: ["E4", "G4", "B4", "D5"],   // Em7
+            3: ["F4", "Ab4", "C5", "Eb5"], // Fm7
+            4: ["G4", "Bb4", "D5", "F5"],  // Gm7
+            5: ["A4", "C5", "E5", "G5"]    // Am7
         }
     }
 ];
@@ -177,7 +177,7 @@ function analyzeColor() {
 
     // Smoothly update filter frequency, reverb wet, and delay time
     smoothUpdateParam(filter.frequency, 1000 + (hue / 360) * 4000); // Filter frequency between 1000 and 5000 Hz
-    smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 1
+    smoothUpdateParam(reverb.wet, saturation / 100); // Reverb wet level between 0 and 0.3
     smoothUpdateParam(delay.delayTime, lightness / 100); // Delay time between 0.1 and 1 second
 
     // Only play note if lightness is above the threshold (not too dark)
