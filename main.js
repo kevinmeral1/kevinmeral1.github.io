@@ -184,7 +184,7 @@ function analyzeColor() {
     }
 
     // Set the border color based on the HSL values
-    let hslString = hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%);
+    let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
     document.getElementById('video-container').style.borderColor = hslString;
 
     // Adjust analyze interval based on lightness (brightness)
