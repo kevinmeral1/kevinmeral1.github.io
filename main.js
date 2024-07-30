@@ -4,12 +4,12 @@ let ctx = canvas.getContext('2d');
 let interval;
 let isRunning = false;
 let currentStream;
-let cameraFacing = 'user'; // Initial camera facing mode
-let previousHSL = { h: 0, s: 0, l: 0 }; // Store previous HSL values to maintain rhythm
-let analyzeInterval = 1000; // Start with a 1-second interval
-let currentVariant = 1; // Initial variant
+let cameraFacing = 'user'; 
+let previousHSL = { h: 0, s: 0, l: 0 }; 
+let analyzeInterval = 1000; 
+let currentVariant = 1; 
 
-// Synthesizer and parameters for each variant
+
 let variants = [
     {
         synth: new Tone.PolySynth(Tone.Synth, { maxPolyphony: 4, volume: -20 }).toDestination(),
@@ -61,7 +61,7 @@ let variants = [
     }
 ];
 
-// Initialize current variant
+
 let synth = variants[currentVariant - 1].synth;
 let minDuration = variants[currentVariant - 1].minDuration;
 let maxDuration = variants[currentVariant - 1].maxDuration;
@@ -151,58 +151,58 @@ function analyzeColor() {
 
     let hslColor = rgbToHsl(averageColor.r, averageColor.g, averageColor.b);
 
-    // Map HSL to musical parameters
-    let hue = hslColor.h; // 0 - 360
-    let saturation = hslColor.s; // 0 - 100
-    let lightness = hslColor.l; // 0 - 100
+    
+    let hue = hslColor.h; 
+    let saturation = hslColor.s; 
+    let lightness = hslColor.l; 
 
-    // Define a threshold for darkness
-    const darknessThreshold = 20; // below this lightness value is considered too dark
+    
+    const darknessThreshold = 20; 
 
-    // Determine the chord based on hue
+    
     let chordIndex = Math.floor(hue / 60) % 6;
     let chord = variants[currentVariant - 1].chords[chordIndex];
 
-    // Map lightness to volume (0 dB at white to silence at black)
-    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; // silence if too dark
+    
+    let volume = lightness > darknessThreshold ? Tone.gainToDb(lightness / 100) : -Infinity; 
 
-    // Map lightness to note duration (longer notes for darker colors)
+   
     let duration = minDuration + ((100 - lightness) / 100) * (maxDuration - minDuration);
 
-    // Only play note if lightness is above the threshold (not too dark)
+    
     if (lightness > darknessThreshold) {
-        // Play the chord with a rhythmic pattern
+       
         synth.triggerAttackRelease(chord, duration);
     } else {
-        // If too dark, do not play a note but keep the rhythm
+        
         synth.triggerRelease();
     }
 
-    // Update previous HSL values only if color has changed
+    
     if (hslColor.h !== previousHSL.h || hslColor.s !== previousHSL.s || hslColor.l !== previousHSL.l) {
         previousHSL = hslColor;
     }
 
-    // Set the border color based on the HSL values
+    
     let hslString = `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
     document.getElementById('video-container').style.borderColor = hslString;
 
-    // Adjust analyze interval based on lightness (brightness)
-    clearInterval(interval); // Clear the previous interval
-    analyzeInterval = 1000 - (lightness * 10); // Example mapping, adjust as needed
-    interval = setInterval(analyzeColor, analyzeInterval); // Set the new interval
+   
+    clearInterval(interval); 
+    analyzeInterval = 1000 - (lightness * 10); 
+    interval = setInterval(analyzeColor, analyzeInterval); 
 }
 
 document.getElementById('start-stop').addEventListener('click', async () => {
     if (!isRunning) {
         await Tone.start();
-        interval = setInterval(analyzeColor, analyzeInterval); // Start with the initial interval
+        interval = setInterval(analyzeColor, analyzeInterval); 
         isRunning = true;
-        document.getElementById('start-stop').textContent = 'Stop'; // Change button text to Stop
+        document.getElementById('start-stop').textContent = 'Stop'; 
     } else {
         clearInterval(interval);
         isRunning = false;
-        document.getElementById('start-stop').textContent = 'Start'; // Change button text to Start
+        document.getElementById('start-stop').textContent = 'Start'; 
     }
 });
 
@@ -224,9 +224,9 @@ document.querySelectorAll('.variant-button').forEach(button => {
 });
 
 function switchVariant(variantNumber) {
-    // Update the current variant
+    
     currentVariant = variantNumber;
-    // Update synth and parameters
+    
     synth = variants[currentVariant - 1].synth;
     minDuration = variants[currentVariant - 1].minDuration;
     maxDuration = variants[currentVariant - 1].maxDuration;
@@ -239,13 +239,13 @@ function switchVariant(variantNumber) {
 }
 
 function updateSelectedButton(selectedButton) {
-    // Remove the 'selected' class from all buttons
+    
     document.querySelectorAll('.variant-button').forEach(button => {
         button.classList.remove('selected');
     });
-    // Add the 'selected' class to the clicked button
+    
     selectedButton.classList.add('selected');
 }
 
-// Initialize the camera on page load
+
 startCamera();
